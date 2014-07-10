@@ -36,3 +36,19 @@ func BuildLengthEncodedInt(value uint64) (data []byte) {
     data[8] = byte(value >> 56 & 0xFF)
     return data
 }
+
+func (packet Packet) GetLengthEncodedInt() (value uint64) {
+    switch packet.data[packet.offset] {
+        case 0xFC:
+            packet.offset++
+            return uint64(packet.GetFixedInt2())
+        case 0xFD:
+            packet.offset++
+            return uint64(packet.GetFixedInt3())
+        case 0xFE:
+            packet.offset++
+            return uint64(packet.GetFixedInt8())
+        default:
+            return uint64(packet.GetFixedInt1())
+    }
+}
