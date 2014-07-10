@@ -1,0 +1,51 @@
+package MySQLProtocol
+
+const SERVER_STATUS_IN_TRANS                uint16 = 0x0001
+const SERVER_STATUS_AUTOCOMMIT              uint16 = 0x0002
+const SERVER_MORE_RESULTS_EXISTS            uint16 = 0x0008
+const SERVER_STATUS_NO_GOOD_INDEX_USED      uint16 = 0x0010
+const SERVER_STATUS_NO_INDEX_USED           uint16 = 0x0020
+const SERVER_STATUS_CURSOR_EXISTS           uint16 = 0x0040
+const SERVER_STATUS_LAST_ROW_SENT           uint16 = 0x0080
+const SERVER_STATUS_DB_DROPPED              uint16 = 0x0100
+const SERVER_STATUS_NO_BACKSLASH_ESCAPES    uint16 = 0x0200
+const SERVER_STATUS_METADATA_CHANGED        uint16 = 0x0400
+const SERVER_QUERY_WAS_SLOW                 uint16 = 0x0800
+const SERVER_PS_OUT_PARAMS                  uint16 = 0x1000
+
+const Character_Set_latin1_swedish_ci       byte = 0x08
+const Character_Set_utf8_general_ci         byte = 0x21
+const Character_Set_binary                  byte = 0x3f
+
+const COM_SLEEP                             byte = 0x00
+const COM_QUIT                              byte = 0x01
+const COM_INIT_DB                           byte = 0x02
+const COM_QUERY                             byte = 0x03
+const COM_FIELD_LIST                        byte = 0x04
+const COM_CREATE_DB                         byte = 0x05
+const COM_DROP_DB                           byte = 0x06
+const COM_REFRESH                           byte = 0x07
+const COM_SHUTDOWN                          byte = 0x08
+const COM_STATISTICS                        byte = 0x09
+const COM_PROCESS_INFO                      byte = 0x0A
+const COM_CONNECT                           byte = 0x0B
+const COM_PROCESS_KILL                      byte = 0x0C
+const COM_DEBUG                             byte = 0x0D
+const COM_PING                              byte = 0x0E
+const COM_TIME                              byte = 0x0F
+const COM_DELAYED_INSERT                    byte = 0x10
+const COM_CHANGE_USER                       byte = 0x11
+const COM_BINLOG_DUMP                       byte = 0x12
+const COM_TABLE_DUMP                        byte = 0x13
+const COM_CONNECT_OUT                       byte = 0x14
+const COM_REGISTER_SLAVE                    byte = 0x15
+const COM_STMT_PREPARE                      byte = 0x16
+const COM_STMT_EXECUTE                      byte = 0x17
+const COM_STMT_SEND_LONG_DATA               byte = 0x18
+const COM_STMT_CLOSE                        byte = 0x19
+const COM_STMT_RESET                        byte = 0x1A
+const COM_SET_OPTION                        byte = 0x1B
+const COM_STMT_FETCH                        byte = 0x1C
+const COM_DAEMON                            byte = 0x1D
+const COM_BINLOG_DUMP_GTID                  byte = 0x1E
+const COM_RESET_CONNECTION                  byte = 0x1F
