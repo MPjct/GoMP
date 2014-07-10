@@ -3,7 +3,7 @@ package MySQLProtocol
 import "testing"
 import "github.com/stretchr/testify/assert"
 
-func Test_MySQLProtocol_BuildFixedInt1(t *testing.T) {
+func Test_BuildFixedInt1(t *testing.T) {
 	var values = []struct {
 		in   uint8
 		out  [1]byte
@@ -16,13 +16,13 @@ func Test_MySQLProtocol_BuildFixedInt1(t *testing.T) {
 	}
 }
 
-func Benchmark_MySQLProtocol_BuildFixedInt_1(b *testing.B) {
+func Benchmark_BuildFixedInt1(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		BuildFixedInt1(uint8(i))
 	}
 }
 
-func Test_MySQLProtocol_BuildFixedInt2(t *testing.T) {
+func Test_BuildFixedInt2(t *testing.T) {
 	var values = []struct {
 		in   uint16
 		out  [2]byte
@@ -35,13 +35,13 @@ func Test_MySQLProtocol_BuildFixedInt2(t *testing.T) {
 	}
 }
 
-func Benchmark_MySQLProtocol_BuildFixedInt_2(b *testing.B) {
+func Benchmark_BuildFixedInt2(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		BuildFixedInt2(uint16(i))
 	}
 }
 
-func Test_MySQLProtocol_BuildFixedInt3(t *testing.T) {
+func Test_BuildFixedInt3(t *testing.T) {
 	var values = []struct {
 		in   uint32
 		out  [3]byte
@@ -54,13 +54,13 @@ func Test_MySQLProtocol_BuildFixedInt3(t *testing.T) {
 	}
 }
 
-func Benchmark_MySQLProtocol_BuildFixedInt_3(b *testing.B) {
+func Benchmark_BuildFixedInt3(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		BuildFixedInt3(uint32(i))
 	}
 }
 
-func Test_MySQLProtocol_BuildFixedInt4(t *testing.T) {
+func Test_BuildFixedInt4(t *testing.T) {
 	var values = []struct {
 		in   uint32
 		out  [4]byte
@@ -73,13 +73,13 @@ func Test_MySQLProtocol_BuildFixedInt4(t *testing.T) {
 	}
 }
 
-func Benchmark_MySQLProtocol_BuildFixedInt_4(b *testing.B) {
+func Benchmark_BuildFixedInt4(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		BuildFixedInt4(uint32(i))
 	}
 }
 
-func Test_MySQLProtocol_BuildFixedInt8(t *testing.T) {
+func Test_BuildFixedInt8(t *testing.T) {
 	var values = []struct {
 		in   uint64
 		out  [8]byte
@@ -92,7 +92,7 @@ func Test_MySQLProtocol_BuildFixedInt8(t *testing.T) {
 	}
 }
 
-func Benchmark_MySQLProtocol_BuildFixedInt_8(b *testing.B) {
+func Benchmark_BuildFixedInt8(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		BuildFixedInt8(uint64(i))
 	}
