@@ -17,6 +17,7 @@ func Test_BuildFixedString(t *testing.T) {
         {in: "A",            eop: false, size: 3,   out: []byte{0x41, 0x0, 0x0,}},
         {in: "ABC",          eop: false, size: 1,   out: []byte{0x41,}},
         {in: "ABC",          eop: true,             out: []byte{0x41, 0x42, 0x43,}},
+        {in: "",             eop: false, size: 1,   out: []byte{0x0,}},
 	}
     
     for _, value := range values {
