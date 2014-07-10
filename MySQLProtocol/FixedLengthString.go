@@ -1,6 +1,6 @@
 package MySQLProtocol
 
-func BuildFixedString(value string, size ...uint) (data []byte) {
+func BuildFixedLengthString(value string, size ...uint) (data []byte) {
     var datasize uint
     if len(size) == 0 {
         datasize = uint(len(value))

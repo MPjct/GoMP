@@ -1,37 +1,37 @@
 package MySQLProtocol
 
-func BuildFixedInt1(value uint8) (data [1]byte) {
+func BuildFixedLengthInteger1(value uint8) (data [1]byte) {
 	data[0] = byte(value >> 0 & 0xFF)
 	return data
 }
 
-func (packet Packet) GetFixedInt1() (value uint8) {
+func (packet Packet) GetFixedLengthInteger1() (value uint8) {
     value |= uint8(packet.data[packet.offset] & 0xFF)
     packet.offset += 1
     return value
 }
 
-func BuildFixedInt2(value uint16) (data [2]byte) {
+func BuildFixedLengthInteger2(value uint16) (data [2]byte) {
 	data[0] = byte(value >> 0 & 0xFF)
 	data[1] = byte(value >> 8 & 0xFF)
 	return data
 }
 
-func (packet Packet) GetFixedInt2() (value uint16) {
+func (packet Packet) GetFixedLengthInteger2() (value uint16) {
     value |= uint16(packet.data[packet.offset+1] & 0xFF) << 8
     value |= uint16(packet.data[packet.offset] & 0xFF)
     packet.offset += 2
     return value
 }
 
-func BuildFixedInt3(value uint32) (data [3]byte) {
+func BuildFixedLengthInteger3(value uint32) (data [3]byte) {
 	data[0] = byte(value >> 0 & 0xFF)
 	data[1] = byte(value >> 8 & 0xFF)
 	data[2] = byte(value >> 16 & 0xFF)
 	return data
 }
 
-func (packet Packet) GetFixedInt3() (value uint32) {
+func (packet Packet) GetFixedLengthInteger3() (value uint32) {
     value |= uint32(packet.data[packet.offset+2] & 0xFF) << 16
     value |= uint32(packet.data[packet.offset+1] & 0xFF) << 8
     value |= uint32(packet.data[packet.offset] & 0xFF)
@@ -39,7 +39,7 @@ func (packet Packet) GetFixedInt3() (value uint32) {
     return value
 }
 
-func BuildFixedInt4(value uint32) (data [4]byte) {
+func BuildFixedLengthInteger4(value uint32) (data [4]byte) {
 	data[0] = byte(value >> 0 & 0xFF)
 	data[1] = byte(value >> 8 & 0xFF)
 	data[2] = byte(value >> 16 & 0xFF)
@@ -47,7 +47,7 @@ func BuildFixedInt4(value uint32) (data [4]byte) {
 	return data
 }
 
-func (packet Packet) GetFixedInt4() (value uint32) {
+func (packet Packet) GetFixedLengthInteger4() (value uint32) {
     value |= uint32(packet.data[packet.offset+3] & 0xFF) << 24
     value |= uint32(packet.data[packet.offset+2] & 0xFF) << 16
     value |= uint32(packet.data[packet.offset+1] & 0xFF) << 8
@@ -56,7 +56,7 @@ func (packet Packet) GetFixedInt4() (value uint32) {
     return value
 }
 
-func BuildFixedInt6(value uint64) (data [6]byte) {
+func BuildFixedLengthInteger6(value uint64) (data [6]byte) {
 	data[0] = byte(value >> 0 & 0xFF)
 	data[1] = byte(value >> 8 & 0xFF)
 	data[2] = byte(value >> 16 & 0xFF)
@@ -66,7 +66,7 @@ func BuildFixedInt6(value uint64) (data [6]byte) {
 	return data
 }
 
-func (packet Packet) GetFixedInt6() (value uint64) {
+func (packet Packet) GetFixedLengthInteger6() (value uint64) {
     value |= uint64(packet.data[packet.offset+5] & 0xFF) << 40
     value |= uint64(packet.data[packet.offset+4] & 0xFF) << 32
     value |= uint64(packet.data[packet.offset+3] & 0xFF) << 24
@@ -77,7 +77,7 @@ func (packet Packet) GetFixedInt6() (value uint64) {
     return value
 }
 
-func BuildFixedInt8(value uint64) (data [8]byte) {
+func BuildFixedLengthInteger8(value uint64) (data [8]byte) {
 	data[0] = byte(value >> 0 & 0xFF)
 	data[1] = byte(value >> 8 & 0xFF)
 	data[2] = byte(value >> 16 & 0xFF)
@@ -89,7 +89,7 @@ func BuildFixedInt8(value uint64) (data [8]byte) {
 	return data
 }
 
-func (packet Packet) GetFixedInt8() (value uint64) {
+func (packet Packet) GetFixedLengthInteger8() (value uint64) {
     value |= uint64(packet.data[packet.offset+7] & 0xFF) << 56
     value |= uint64(packet.data[packet.offset+6] & 0xFF) << 48
     value |= uint64(packet.data[packet.offset+5] & 0xFF) << 40

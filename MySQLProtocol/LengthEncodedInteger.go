@@ -1,6 +1,6 @@
 package MySQLProtocol
 
-func BuildLengthEncodedInt(value uint64) (data []byte) {
+func BuildLengthEncodedInteger(value uint64) (data []byte) {
     if value < 251 {
         data = make([]byte, 1)
         data[0] = byte(value >> 0 & 0xFF)
@@ -37,18 +37,18 @@ func BuildLengthEncodedInt(value uint64) (data []byte) {
     return data
 }
 
-func (packet Packet) GetLengthEncodedInt() (value uint64) {
+func (packet Packet) GetLengthEncodedInteger() (value uint64) {
     switch packet.data[packet.offset] {
         case 0xFC:
             packet.offset++
-            return uint64(packet.GetFixedInt2())
+            return uint64(packet.GetFixedLengthInteger2())
         case 0xFD:
             packet.offset++
-            return uint64(packet.GetFixedInt3())
+            return uint64(packet.GetFixedLengthInteger3())
         case 0xFE:
             packet.offset++
-            return uint64(packet.GetFixedInt8())
+            return uint64(packet.GetFixedLengthInteger8())
         default:
-            return uint64(packet.GetFixedInt1())
+            return uint64(packet.GetFixedLengthInteger1())
     }
 }

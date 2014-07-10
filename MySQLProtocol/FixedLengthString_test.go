@@ -3,7 +3,7 @@ package MySQLProtocol
 import "testing"
 import "github.com/stretchr/testify/assert"
 
-func Test_BuildFixedString(t *testing.T) {
+func Test_BuildFixedLengthString(t *testing.T) {
 	var values = []struct {
 		in   string
         size uint
@@ -22,15 +22,15 @@ func Test_BuildFixedString(t *testing.T) {
     
     for _, value := range values {
         if value.eop {
-            assert.Equal(t, BuildFixedString(value.in), value.out, "")
+            assert.Equal(t, BuildFixedLengthString(value.in), value.out, "")
         } else {
-            assert.Equal(t, BuildFixedString(value.in, value.size), value.out, "")
+            assert.Equal(t, BuildFixedLengthString(value.in, value.size), value.out, "")
         }
 	}
 }
 
-func Benchmark_BuildFixedString(b *testing.B) {
+func Benchmark_BuildFixedLengthString(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		BuildFixedString("ABC", 3)
+		BuildFixedLengthString("ABC", 3)
 	}
 }

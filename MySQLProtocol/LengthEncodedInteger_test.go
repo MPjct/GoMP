@@ -3,7 +3,7 @@ package MySQLProtocol
 import "testing"
 import "github.com/stretchr/testify/assert"
 
-func Test_BuildLengthEncodedInt(t *testing.T) {
+func Test_BuildLengthEncodedInteger(t *testing.T) {
 	var values = []struct {
 		in   uint64
 		out  []byte
@@ -17,17 +17,17 @@ func Test_BuildLengthEncodedInt(t *testing.T) {
 	}
     
     for _, value := range values {
-        assert.Equal(t, BuildLengthEncodedInt(value.in), value.out, "")
+        assert.Equal(t, BuildLengthEncodedInteger(value.in), value.out, "")
 	}
 }
 
-func Benchmark_BuildLengthEncodedInt(b *testing.B) {
+func Benchmark_BuildLengthEncodedInteger(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		BuildLengthEncodedInt(uint64(i))
+		BuildLengthEncodedInteger(uint64(i))
 	}
 }
 
-func Test_GetLengthEncodedInt(t *testing.T) {
+func Test_GetLengthEncodedInteger(t *testing.T) {
     var packet Packet
 	var values = []struct {
 		in   []byte
@@ -42,14 +42,14 @@ func Test_GetLengthEncodedInt(t *testing.T) {
     
     for _, value := range values {
         packet = Packet{ data: value.in}
-        assert.Equal(t, packet.GetLengthEncodedInt(), value.out, "")
+        assert.Equal(t, packet.GetLengthEncodedInteger(), value.out, "")
 	}
 }
 
-func Benchmark_GetLengthEncodedInt(b *testing.B) {
+func Benchmark_GetLengthEncodedInteger(b *testing.B) {
 	packet := Packet{ data: []byte{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}}
     b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		packet.GetLengthEncodedInt()
+		packet.GetLengthEncodedInteger()
 	}
 }

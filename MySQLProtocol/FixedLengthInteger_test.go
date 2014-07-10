@@ -3,7 +3,7 @@ package MySQLProtocol
 import "testing"
 import "github.com/stretchr/testify/assert"
 
-func Test_BuildFixedInt1(t *testing.T) {
+func Test_BuildFixedLengthInteger1(t *testing.T) {
 	var values = []struct {
 		in   uint8
 		out  [1]byte
@@ -12,17 +12,17 @@ func Test_BuildFixedInt1(t *testing.T) {
 	}
     
     for _, value := range values {
-        assert.Equal(t, BuildFixedInt1(value.in), value.out, "")
+        assert.Equal(t, BuildFixedLengthInteger1(value.in), value.out, "")
 	}
 }
 
-func Benchmark_BuildFixedInt1(b *testing.B) {
+func Benchmark_BuildFixedLengthInteger1(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		BuildFixedInt1(uint8(i))
+		BuildFixedLengthInteger1(uint8(i))
 	}
 }
 
-func Test_GetFixedInt1(t *testing.T) {
+func Test_GetFixedLengthInteger1(t *testing.T) {
     var packet Packet
 	var values = []struct {
 		in   []byte
@@ -35,19 +35,19 @@ func Test_GetFixedInt1(t *testing.T) {
     
     for _, value := range values {
         packet = Packet{ data: value.in}
-        assert.Equal(t, packet.GetFixedInt1(), value.out, "")
+        assert.Equal(t, packet.GetFixedLengthInteger1(), value.out, "")
 	}
 }
 
-func Benchmark_GetFixedInt1(b *testing.B) {
+func Benchmark_GetFixedLengthInteger1(b *testing.B) {
 	packet := Packet{ data: []byte{0x0}}
     b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		packet.GetFixedInt1()
+		packet.GetFixedLengthInteger1()
 	}
 }
 
-func Test_BuildFixedInt2(t *testing.T) {
+func Test_BuildFixedLengthInteger2(t *testing.T) {
 	var values = []struct {
 		in   uint16
 		out  [2]byte
@@ -56,17 +56,17 @@ func Test_BuildFixedInt2(t *testing.T) {
 	}
     
     for _, value := range values {
-        assert.Equal(t, BuildFixedInt2(value.in), value.out, "")
+        assert.Equal(t, BuildFixedLengthInteger2(value.in), value.out, "")
 	}
 }
 
-func Benchmark_BuildFixedInt2(b *testing.B) {
+func Benchmark_BuildFixedLengthInteger2(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		BuildFixedInt2(uint16(i))
+		BuildFixedLengthInteger2(uint16(i))
 	}
 }
 
-func Test_GetFixedInt2(t *testing.T) {
+func Test_GetFixedLengthInteger2(t *testing.T) {
     var packet Packet
 	var values = []struct {
 		in   []byte
@@ -79,19 +79,19 @@ func Test_GetFixedInt2(t *testing.T) {
     
     for _, value := range values {
         packet = Packet{ data: value.in}
-        assert.Equal(t, packet.GetFixedInt2(), value.out, "")
+        assert.Equal(t, packet.GetFixedLengthInteger2(), value.out, "")
 	}
 }
 
-func Benchmark_GetFixedInt2(b *testing.B) {
+func Benchmark_GetFixedLengthInteger2(b *testing.B) {
 	packet := Packet{ data: []byte{0x0, 0x0}}
     b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		packet.GetFixedInt2()
+		packet.GetFixedLengthInteger2()
 	}
 }
 
-func Test_BuildFixedInt3(t *testing.T) {
+func Test_BuildFixedLengthInteger3(t *testing.T) {
 	var values = []struct {
 		in   uint32
 		out  [3]byte
@@ -100,17 +100,17 @@ func Test_BuildFixedInt3(t *testing.T) {
 	}
     
     for _, value := range values {
-        assert.Equal(t, BuildFixedInt3(value.in), value.out, "")
+        assert.Equal(t, BuildFixedLengthInteger3(value.in), value.out, "")
 	}
 }
 
-func Benchmark_BuildFixedInt3(b *testing.B) {
+func Benchmark_BuildFixedLengthInteger3(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		BuildFixedInt3(uint32(i))
+		BuildFixedLengthInteger3(uint32(i))
 	}
 }
 
-func Test_GetFixedInt3(t *testing.T) {
+func Test_GetFixedLengthInteger3(t *testing.T) {
     var packet Packet
 	var values = []struct {
 		in   []byte
@@ -123,19 +123,19 @@ func Test_GetFixedInt3(t *testing.T) {
     
     for _, value := range values {
         packet = Packet{ data: value.in}
-        assert.Equal(t, packet.GetFixedInt3(), value.out, "")
+        assert.Equal(t, packet.GetFixedLengthInteger3(), value.out, "")
 	}
 }
 
-func Benchmark_GetFixedInt3(b *testing.B) {
+func Benchmark_GetFixedLengthInteger3(b *testing.B) {
 	packet := Packet{ data: []byte{0x0, 0x0, 0x0}}
     b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		packet.GetFixedInt3()
+		packet.GetFixedLengthInteger3()
 	}
 }
 
-func Test_BuildFixedInt4(t *testing.T) {
+func Test_BuildFixedLengthInteger4(t *testing.T) {
 	var values = []struct {
 		in   uint32
 		out  [4]byte
@@ -144,17 +144,17 @@ func Test_BuildFixedInt4(t *testing.T) {
 	}
     
     for _, value := range values {
-        assert.Equal(t, BuildFixedInt4(value.in), value.out, "")
+        assert.Equal(t, BuildFixedLengthInteger4(value.in), value.out, "")
 	}
 }
 
-func Benchmark_BuildFixedInt4(b *testing.B) {
+func Benchmark_BuildFixedLengthInteger4(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		BuildFixedInt4(uint32(i))
+		BuildFixedLengthInteger4(uint32(i))
 	}
 }
 
-func Test_GetFixedInt4(t *testing.T) {
+func Test_GetFixedLengthInteger4(t *testing.T) {
     var packet Packet
 	var values = []struct {
 		in   []byte
@@ -167,19 +167,19 @@ func Test_GetFixedInt4(t *testing.T) {
     
     for _, value := range values {
         packet = Packet{ data: value.in}
-        assert.Equal(t, packet.GetFixedInt4(), value.out, "")
+        assert.Equal(t, packet.GetFixedLengthInteger4(), value.out, "")
 	}
 }
 
-func Benchmark_GetFixedInt4(b *testing.B) {
+func Benchmark_GetFixedLengthInteger4(b *testing.B) {
 	packet := Packet{ data: []byte{0x0, 0x0, 0x0, 0x0}}
     b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		packet.GetFixedInt4()
+		packet.GetFixedLengthInteger4()
 	}
 }
 
-func Test_BuildFixedInt6(t *testing.T) {
+func Test_BuildFixedLengthInteger6(t *testing.T) {
 	var values = []struct {
 		in   uint64
 		out  [6]byte
@@ -188,17 +188,17 @@ func Test_BuildFixedInt6(t *testing.T) {
 	}
     
     for _, value := range values {
-        assert.Equal(t, BuildFixedInt6(value.in), value.out, "")
+        assert.Equal(t, BuildFixedLengthInteger6(value.in), value.out, "")
 	}
 }
 
-func Benchmark_BuildFixedInt6(b *testing.B) {
+func Benchmark_BuildFixedLengthInteger6(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		BuildFixedInt6(uint64(i))
+		BuildFixedLengthInteger6(uint64(i))
 	}
 }
 
-func Test_GetFixedInt6(t *testing.T) {
+func Test_GetFixedLengthInteger6(t *testing.T) {
     var packet Packet
 	var values = []struct {
 		in   []byte
@@ -211,19 +211,19 @@ func Test_GetFixedInt6(t *testing.T) {
     
     for _, value := range values {
         packet = Packet{ data: value.in}
-        assert.Equal(t, packet.GetFixedInt6(), value.out, "")
+        assert.Equal(t, packet.GetFixedLengthInteger6(), value.out, "")
 	}
 }
 
-func Benchmark_GetFixedInt6(b *testing.B) {
+func Benchmark_GetFixedLengthInteger6(b *testing.B) {
 	packet := Packet{ data: []byte{0x0, 0x0, 0x0, 0x0, 0x0, 0x0,}}
     b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		packet.GetFixedInt6()
+		packet.GetFixedLengthInteger6()
 	}
 }
 
-func Test_BuildFixedInt8(t *testing.T) {
+func Test_BuildFixedLengthInteger8(t *testing.T) {
 	var values = []struct {
 		in   uint64
 		out  [8]byte
@@ -232,17 +232,17 @@ func Test_BuildFixedInt8(t *testing.T) {
 	}
     
     for _, value := range values {
-        assert.Equal(t, BuildFixedInt8(value.in), value.out, "")
+        assert.Equal(t, BuildFixedLengthInteger8(value.in), value.out, "")
 	}
 }
 
-func Benchmark_BuildFixedInt8(b *testing.B) {
+func Benchmark_BuildFixedLengthInteger8(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		BuildFixedInt8(uint64(i))
+		BuildFixedLengthInteger8(uint64(i))
 	}
 }
 
-func Test_GetFixedInt8(t *testing.T) {
+func Test_GetFixedLengthInteger8(t *testing.T) {
     var packet Packet
 	var values = []struct {
 		in   []byte
@@ -255,14 +255,14 @@ func Test_GetFixedInt8(t *testing.T) {
     
     for _, value := range values {
         packet = Packet{ data: value.in}
-        assert.Equal(t, packet.GetFixedInt8(), value.out, "")
+        assert.Equal(t, packet.GetFixedLengthInteger8(), value.out, "")
 	}
 }
 
-func Benchmark_GetFixedInt8(b *testing.B) {
+func Benchmark_GetFixedLengthInteger8(b *testing.B) {
 	packet := Packet{ data: []byte{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}}
     b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		packet.GetFixedInt8()
+		packet.GetFixedLengthInteger8()
 	}
 }

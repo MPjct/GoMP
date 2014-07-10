@@ -3,7 +3,7 @@ package MySQLProtocol
 import "testing"
 import "github.com/stretchr/testify/assert"
 
-func Test_BuildNullString(t *testing.T) {
+func Test_BuildNulTerminatedString(t *testing.T) {
 	var values = []struct {
 		in   string
 		out  []byte
@@ -15,12 +15,12 @@ func Test_BuildNullString(t *testing.T) {
 	}
     
     for _, value := range values {
-        assert.Equal(t, BuildNullString(value.in), value.out, "")
+        assert.Equal(t, BuildNulTerminatedString(value.in), value.out, "")
 	}
 }
 
-func Benchmark_BuildNullString(b *testing.B) {
+func Benchmark_BuildNulTerminatedString(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		BuildNullString("ABC")
+		BuildNulTerminatedString("ABC")
 	}
 }
