@@ -56,6 +56,27 @@ func (packet Packet) GetFixedInt4() (value uint32) {
     return value
 }
 
+func BuildFixedInt6(value uint64) (data [6]byte) {
+	data[0] = byte(value >> 0 & 0xFF)
+	data[1] = byte(value >> 8 & 0xFF)
+	data[2] = byte(value >> 16 & 0xFF)
+	data[3] = byte(value >> 24 & 0xFF)
+	data[4] = byte(value >> 32 & 0xFF)
+	data[5] = byte(value >> 40 & 0xFF)
+	return data
+}
+
+func (packet Packet) GetFixedInt6() (value uint64) {
+    value |= uint64(packet.data[packet.offset+5] & 0xFF) << 40
+    value |= uint64(packet.data[packet.offset+4] & 0xFF) << 32
+    value |= uint64(packet.data[packet.offset+3] & 0xFF) << 24
+    value |= uint64(packet.data[packet.offset+2] & 0xFF) << 16
+    value |= uint64(packet.data[packet.offset+1] & 0xFF) << 8
+    value |= uint64(packet.data[packet.offset] & 0xFF)
+    packet.offset += 6
+    return value
+}
+
 func BuildFixedInt8(value uint64) (data [8]byte) {
 	data[0] = byte(value >> 0 & 0xFF)
 	data[1] = byte(value >> 8 & 0xFF)
