@@ -5,10 +5,24 @@ func BuildFixedInt1(value uint8) (data [1]byte) {
 	return data
 }
 
+func (packet Packet) GetFixedInt1() (value uint8) {
+    value |= uint8(packet.data[packet.offset] & 0xFF)
+    packet.offset += 1
+    return value
+}
+
 func BuildFixedInt2(value uint16) (data [2]byte) {
 	data[0] = byte(value >> 0 & 0xFF)
 	data[1] = byte(value >> 8 & 0xFF)
 	return data
+}
+
+func (packet Packet) GetFixedInt2() (value uint16) {
+    value |= uint16(packet.data[packet.offset+1] & 0xFF)
+    value <<= 8
+    value |= uint16(packet.data[packet.offset] & 0xFF)
+    packet.offset += 2
+    return value
 }
 
 func BuildFixedInt3(value uint32) (data [3]byte) {
@@ -18,12 +32,34 @@ func BuildFixedInt3(value uint32) (data [3]byte) {
 	return data
 }
 
+func (packet Packet) GetFixedInt3() (value uint32) {
+    value |= uint32(packet.data[packet.offset+2] & 0xFF)
+    value <<= 8
+    value |= uint32(packet.data[packet.offset+1] & 0xFF)
+    value <<= 8
+    value |= uint32(packet.data[packet.offset] & 0xFF)
+    packet.offset += 3
+    return value
+}
+
 func BuildFixedInt4(value uint32) (data [4]byte) {
 	data[0] = byte(value >> 0 & 0xFF)
 	data[1] = byte(value >> 8 & 0xFF)
 	data[2] = byte(value >> 16 & 0xFF)
 	data[3] = byte(value >> 24 & 0xFF)
 	return data
+}
+
+func (packet Packet) GetFixedInt4() (value uint32) {
+    value |= uint32(packet.data[packet.offset+3] & 0xFF)
+    value <<= 8
+    value |= uint32(packet.data[packet.offset+2] & 0xFF)
+    value <<= 8
+    value |= uint32(packet.data[packet.offset+1] & 0xFF)
+    value <<= 8
+    value |= uint32(packet.data[packet.offset] & 0xFF)
+    packet.offset += 4
+    return value
 }
 
 func BuildFixedInt8(value uint64) (data [8]byte) {
@@ -36,4 +72,24 @@ func BuildFixedInt8(value uint64) (data [8]byte) {
 	data[6] = byte(value >> 48 & 0xFF)
 	data[7] = byte(value >> 56 & 0xFF)
 	return data
+}
+
+func (packet Packet) GetFixedInt8() (value uint32) {
+    value |= uint32(packet.data[packet.offset+7] & 0xFF)
+    value <<= 8
+    value |= uint32(packet.data[packet.offset+6] & 0xFF)
+    value <<= 8
+    value |= uint32(packet.data[packet.offset+5] & 0xFF)
+    value <<= 8
+    value |= uint32(packet.data[packet.offset+4] & 0xFF)
+    value <<= 8
+    value |= uint32(packet.data[packet.offset+3] & 0xFF)
+    value <<= 8
+    value |= uint32(packet.data[packet.offset+2] & 0xFF)
+    value <<= 8
+    value |= uint32(packet.data[packet.offset+1] & 0xFF)
+    value <<= 8
+    value |= uint32(packet.data[packet.offset] & 0xFF)
+    packet.offset += 8
+    return value
 }
