@@ -1,51 +1,314 @@
 package MySQLProtocol
 
-const SERVER_STATUS_IN_TRANS                uint16 = 0x0001
-const SERVER_STATUS_AUTOCOMMIT              uint16 = 0x0002
-const SERVER_MORE_RESULTS_EXISTS            uint16 = 0x0008
-const SERVER_STATUS_NO_GOOD_INDEX_USED      uint16 = 0x0010
-const SERVER_STATUS_NO_INDEX_USED           uint16 = 0x0020
-const SERVER_STATUS_CURSOR_EXISTS           uint16 = 0x0040
-const SERVER_STATUS_LAST_ROW_SENT           uint16 = 0x0080
-const SERVER_STATUS_DB_DROPPED              uint16 = 0x0100
-const SERVER_STATUS_NO_BACKSLASH_ESCAPES    uint16 = 0x0200
-const SERVER_STATUS_METADATA_CHANGED        uint16 = 0x0400
-const SERVER_QUERY_WAS_SLOW                 uint16 = 0x0800
-const SERVER_PS_OUT_PARAMS                  uint16 = 0x1000
+const HOSTNAME_LENGTH uint = 60
+const SYSTEM_CHARSET_MBMAXLEN uint = 3
+const NAME_CHAR_LEN uint = 64
+const USERNAME_CHAR_LENGTH uint = 16
+const NAME_LEN uint = NAME_CHAR_LEN * SYSTEM_CHARSET_MBMAXLEN
+const USERNAME_LENGTH uint = USERNAME_CHAR_LENGTH * SYSTEM_CHARSET_MBMAXLEN
 
-const Character_Set_latin1_swedish_ci       byte = 0x08
-const Character_Set_utf8_general_ci         byte = 0x21
-const Character_Set_binary                  byte = 0x3f
+const MYSQL_AUTODETECT_CHARSET_NAME string = "auto"
 
-const COM_SLEEP                             byte = 0x00
-const COM_QUIT                              byte = 0x01
-const COM_INIT_DB                           byte = 0x02
-const COM_QUERY                             byte = 0x03
-const COM_FIELD_LIST                        byte = 0x04
-const COM_CREATE_DB                         byte = 0x05
-const COM_DROP_DB                           byte = 0x06
-const COM_REFRESH                           byte = 0x07
-const COM_SHUTDOWN                          byte = 0x08
-const COM_STATISTICS                        byte = 0x09
-const COM_PROCESS_INFO                      byte = 0x0A
-const COM_CONNECT                           byte = 0x0B
-const COM_PROCESS_KILL                      byte = 0x0C
-const COM_DEBUG                             byte = 0x0D
-const COM_PING                              byte = 0x0E
-const COM_TIME                              byte = 0x0F
-const COM_DELAYED_INSERT                    byte = 0x10
-const COM_CHANGE_USER                       byte = 0x11
-const COM_BINLOG_DUMP                       byte = 0x12
-const COM_TABLE_DUMP                        byte = 0x13
-const COM_CONNECT_OUT                       byte = 0x14
-const COM_REGISTER_SLAVE                    byte = 0x15
-const COM_STMT_PREPARE                      byte = 0x16
-const COM_STMT_EXECUTE                      byte = 0x17
-const COM_STMT_SEND_LONG_DATA               byte = 0x18
-const COM_STMT_CLOSE                        byte = 0x19
-const COM_STMT_RESET                        byte = 0x1A
-const COM_SET_OPTION                        byte = 0x1B
-const COM_STMT_FETCH                        byte = 0x1C
-const COM_DAEMON                            byte = 0x1D
-const COM_BINLOG_DUMP_GTID                  byte = 0x1E
-const COM_RESET_CONNECTION                  byte = 0x1F
+const SERVER_VERSION_LENGTH uint = 60
+const SQLSTATE_LENGTH uint = 5
+
+const TABLE_COMMENT_INLINE_MAXLEN uint = 180
+const TABLE_COMMENT_MAXLEN uint = 2048
+const COLUMN_COMMENT_MAXLEN uint = 1024
+const INDEX_COMMENT_MAXLEN uint = 1024
+const TABLE_PARTITION_COMMENT_MAXLEN uint = 1024
+
+const USER_HOST_BUFF_SIZE uint = HOSTNAME_LENGTH + USERNAME_LENGTH + 2
+
+const MYSQL_ERRMSG_SIZE uint = 512
+const NET_READ_TIMEOUT uint = 30
+const NET_WRITE_TIMEOUT uint = 60
+const NET_WAIT_TIMEOUT uint = 8 * 60 * 60
+
+const ONLY_KILL_QUERY uint = 1
+
+const LOCAL_HOST string = "localhost"
+const LOCAL_HOST_NAMEDPIPE string = "."
+
+const MODE_INIT uint = 0               // Connection opened
+const MODE_READ_HANDSHAKE uint = 1     // Read the handshake from the server and process it
+const MODE_SEND_HANDSHAKE uint = 2     // Forward the handshake from the server
+const MODE_READ_AUTH uint = 3          // Read the reply from the client and process it
+const MODE_SEND_AUTH uint = 4          // Forward the reply from the client
+const MODE_READ_AUTH_RESULT uint = 5   // Read the reply from the server and process it
+const MODE_SEND_AUTH_RESULT uint = 6   // Forward the reply from the server
+const MODE_READ_QUERY uint = 7         // Read the query from the client and process it
+const MODE_SEND_QUERY uint = 8         // Send the query to the server
+const MODE_READ_QUERY_RESULT uint = 9  // Read the result set from the server and and process it
+const MODE_SEND_QUERY_RESULT uint = 10 // Send a result set to the client
+const MODE_CLEANUP uint = 11           // Connection closed
+
+const Character_Set_latin1_swedish_ci byte = 0x08
+const Character_Set_utf8_general_ci byte = 0x21
+const Character_Set_binary byte = 0x3f
+
+const COM_SLEEP byte = 0x00
+const COM_QUIT byte = 0x01
+const COM_INIT_DB byte = 0x02
+const COM_QUERY byte = 0x03
+const COM_FIELD_LIST byte = 0x04
+const COM_CREATE_DB byte = 0x05
+const COM_DROP_DB byte = 0x06
+const COM_REFRESH byte = 0x07
+const COM_SHUTDOWN byte = 0x08
+const COM_STATISTICS byte = 0x09
+const COM_PROCESS_INFO byte = 0x0A // deprecated
+const COM_CONNECT byte = 0x0B      // deprecated
+const COM_PROCESS_KILL byte = 0x0C
+const COM_DEBUG byte = 0x0D
+const COM_PING byte = 0x0E
+const COM_TIME byte = 0x0F           // deprecated
+const COM_DELAYED_INSERT byte = 0x10 // deprecated
+const COM_CHANGE_USER byte = 0x11
+const COM_BINLOG_DUMP byte = 0x12
+const COM_TABLE_DUMP byte = 0x13
+const COM_CONNECT_OUT byte = 0x14
+const COM_REGISTER_SLAVE byte = 0x15
+const COM_STMT_PREPARE byte = 0x16
+const COM_STMT_EXECUTE byte = 0x17
+const COM_STMT_SEND_LONG_DATA byte = 0x18
+const COM_STMT_CLOSE byte = 0x19
+const COM_STMT_RESET byte = 0x1A
+const COM_SET_OPTION byte = 0x1B
+const COM_STMT_FETCH byte = 0x1C
+const COM_DAEMON byte = 0x1D // deprecated
+const COM_BINLOG_DUMP_GTID byte = 0x1E
+const COM_RESET_CONNECTION byte = 0x1F // deprecated
+
+const OK byte = 0x00
+const ERR byte = 0xFF
+const EOF byte = 0xFE
+const LOCAL_INFILE byte = 0xFB
+
+const SERVER_STATUS_IN_TRANS uint16 = 0x0001
+const SERVER_STATUS_AUTOCOMMIT uint16 = 0x0002
+const SERVER_MORE_RESULTS_EXISTS uint16 = 0x0008
+const SERVER_QUERY_NO_GOOD_INDEX_USED uint16 = 0x0010
+const SERVER_STATUS_NO_GOOD_INDEX_USED uint16 = SERVER_QUERY_NO_GOOD_INDEX_USED
+const SERVER_QUERY_NO_INDEX_USED uint16 = 0x0020
+const SERVER_STATUS_NO_INDEX_USED uint16 = SERVER_QUERY_NO_INDEX_USED
+const SERVER_STATUS_CURSOR_EXISTS uint16 = 0x0040
+const SERVER_STATUS_LAST_ROW_SENT uint16 = 0x0080
+const SERVER_STATUS_DB_DROPPED uint16 = 0x0100
+const SERVER_STATUS_NO_BACKSLASH_ESCAPES uint16 = 0x0200
+const SERVER_STATUS_METADATA_CHANGED uint16 = 0x0400
+const SERVER_QUERY_WAS_SLOW uint16 = 0x0800
+const SERVER_PS_OUT_PARAMS uint16 = 0x1000
+const SERVER_STATUS_IN_TRANS_READONLY uint16 = 0x2000
+
+const SERVER_STATUS_CLEAR_SET uint16 = (SERVER_QUERY_NO_GOOD_INDEX_USED |
+	SERVER_QUERY_NO_INDEX_USED |
+	SERVER_MORE_RESULTS_EXISTS |
+	SERVER_STATUS_METADATA_CHANGED |
+	SERVER_QUERY_WAS_SLOW |
+	SERVER_STATUS_DB_DROPPED |
+	SERVER_STATUS_CURSOR_EXISTS |
+	SERVER_STATUS_LAST_ROW_SENT)
+
+const CLIENT_LONG_PASSWORD uint = 1
+const CLIENT_FOUND_ROWS uint = 2
+const CLIENT_LONG_FLAG uint = 4
+const CLIENT_CONNECT_WITH_DB uint = 8
+const CLIENT_NO_SCHEMA uint = 16
+const CLIENT_COMPRESS uint = 32
+const CLIENT_ODBC uint = 64
+const CLIENT_LOCAL_FILES uint = 128
+const CLIENT_IGNORE_SPACE uint = 256
+const CLIENT_PROTOCOL_41 uint = 512
+const CLIENT_INTERACTIVE uint = 1024
+const CLIENT_SSL uint = 2048
+const CLIENT_IGNORE_SIGPIPE uint = 4096
+const CLIENT_TRANSACTIONS uint = 8192
+const CLIENT_RESERVED uint = 16384
+const CLIENT_SECURE_CONNECTION uint = 32768
+const CLIENT_MULTI_STATEMENTS uint = 1 << 16
+const CLIENT_MULTI_RESULTS uint = 1 << 17
+const CLIENT_PS_MULTI_RESULTS uint = 1 << 18
+const CLIENT_PLUGIN_AUTH uint = 1 << 19
+const CLIENT_CONNECT_ATTRS uint = 1 << 20
+const CLIENT_PLUGIN_AUTH_LENENC_CLIENT_DATA uint = 1 << 21
+const CLIENT_CAN_HANDLE_EXPIRED_PASSWORDS uint = 1 << 22
+const CLIENT_SSL_VERIFY_SERVER_CERT uint = 1 << 30
+const CLIENT_REMEMBER_OPTIONS uint = 1 << 31
+
+const CAN_CLIENT_COMPRESS uint = 0
+
+const CLIENT_ALL_FLAGS uint = (CLIENT_LONG_PASSWORD |
+	CLIENT_FOUND_ROWS |
+	CLIENT_LONG_FLAG |
+	CLIENT_CONNECT_WITH_DB |
+	CLIENT_NO_SCHEMA |
+	CLIENT_COMPRESS |
+	CLIENT_ODBC |
+	CLIENT_LOCAL_FILES |
+	CLIENT_IGNORE_SPACE |
+	CLIENT_PROTOCOL_41 |
+	CLIENT_INTERACTIVE |
+	CLIENT_SSL |
+	CLIENT_IGNORE_SIGPIPE |
+	CLIENT_TRANSACTIONS |
+	CLIENT_RESERVED |
+	CLIENT_SECURE_CONNECTION |
+	CLIENT_MULTI_STATEMENTS |
+	CLIENT_MULTI_RESULTS |
+	CLIENT_PS_MULTI_RESULTS |
+	CLIENT_SSL_VERIFY_SERVER_CERT |
+	CLIENT_REMEMBER_OPTIONS |
+	CLIENT_PLUGIN_AUTH |
+	CLIENT_CONNECT_ATTRS |
+	CLIENT_PLUGIN_AUTH_LENENC_CLIENT_DATA |
+	CLIENT_CAN_HANDLE_EXPIRED_PASSWORDS)
+
+const CLIENT_BASIC_FLAGS uint = (((CLIENT_ALL_FLAGS &
+	^CLIENT_SSL) &
+	^CLIENT_COMPRESS) &
+	^CLIENT_SSL_VERIFY_SERVER_CERT)
+
+const MYSQL_TYPE_DECIMAL uint = 0
+const MYSQL_TYPE_TINY uint = 1
+const MYSQL_TYPE_SHORT uint = 2
+const MYSQL_TYPE_LONG uint = 3
+const MYSQL_TYPE_FLOAT uint = 4
+const MYSQL_TYPE_DOUBLE uint = 5
+const MYSQL_TYPE_NULL uint = 6
+const MYSQL_TYPE_TIMESTAMP uint = 7
+const MYSQL_TYPE_LONGLONG uint = 8
+const MYSQL_TYPE_INT24 uint = 9
+const MYSQL_TYPE_DATE uint = 10
+const MYSQL_TYPE_TIME uint = 11
+const MYSQL_TYPE_DATETIME uint = 12
+const MYSQL_TYPE_YEAR uint = 13
+const MYSQL_TYPE_NEWDATE uint = 14
+const MYSQL_TYPE_VARCHAR uint = 15
+const MYSQL_TYPE_BIT uint = 16
+const MYSQL_TYPE_TIMESTAMP2 uint = 17
+const MYSQL_TYPE_DATETIME2 uint = 18
+const MYSQL_TYPE_TIME2 uint = 19
+const MYSQL_TYPE_NEWDECIMAL uint = 246
+const MYSQL_TYPE_ENUM uint = 247
+const MYSQL_TYPE_SET uint = 248
+const MYSQL_TYPE_TINY_BLOB uint = 249
+const MYSQL_TYPE_MEDIUM_BLOB uint = 250
+const MYSQL_TYPE_LONG_BLOB uint = 251
+const MYSQL_TYPE_BLOB uint = 252
+const MYSQL_TYPE_VAR_STRING uint = 253
+const MYSQL_TYPE_STRING uint = 254
+const MYSQL_TYPE_GEOMETRY uint = 255
+
+const REFRESH_GRANT uint = 1
+const REFRESH_LOG uint = 2
+const REFRESH_TABLES uint = 4
+const REFRESH_HOSTS uint = 8
+const REFRESH_STATUS uint = 16
+const REFRESH_THREADS uint = 32
+const REFRESH_SLAVE uint = 64
+const REFRESH_MASTER uint = 128
+const REFRESH_ERROR_LOG uint = 256
+const REFRESH_ENGINE_LOG uint = 512
+const REFRESH_BINARY_LOG uint = 1024
+const REFRESH_RELAY_LOG uint = 2048
+const REFRESH_GENERAL_LOG uint = 4096
+const REFRESH_SLOW_LOG uint = 8192
+const REFRESH_READ_LOCK uint = 16384
+const REFRESH_FAST uint = 32768
+const REFRESH_QUERY_CACHE uint = 65536
+const REFRESH_QUERY_CACHE_FREE uint = 0x20000
+const REFRESH_DES_KEY_FILE uint = 0x40000
+const REFRESH_USER_RESOURCES uint = 0x80000
+const REFRESH_FOR_EXPORT uint = 0x100000
+
+const CURSOR_TYPE_NO_CURSOR uint = 0
+const CURSOR_TYPE_READ_ONLY uint = 1
+const CURSOR_TYPE_FOR_UPDATE uint = 2
+const CURSOR_TYPE_SCROLLABLE uint = 4
+
+const MYSQL_OPTION_MULTI_STATEMENTS_ON uint = 0
+const MYSQL_OPTION_MULTI_STATEMENTS_OFF uint = 1
+
+const ROW_TYPE_TEXT uint = 0
+const ROW_TYPE_BINARY uint = 1
+
+const RS_OK uint = 0
+const RS_FULL uint = 1
+const RS_COL_DEF uint = 2
+const RS_DATA_FILE uint = 3
+
+const SCRAMBLE_LENGTH uint = 20
+const SCRAMBLE_LENGTH_323 uint = 8
+const SCRAMBLED_PASSWORD_CHAR_LENGTH uint = SCRAMBLE_LENGTH*2 + 1
+const SCRAMBLED_PASSWORD_CHAR_LENGTH_323 uint = SCRAMBLE_LENGTH_323 * 2
+
+const NOT_NULL_FLAG uint = 1
+const PRI_KEY_FLAG uint = 2
+const UNIQUE_KEY_FLAG uint = 4
+const MULTIPLE_KEY_FLAG uint = 8
+const BLOB_FLAG uint = 16
+const UNSIGNED_FLAG uint = 32
+const ZEROFILL_FLAG uint = 64
+const BINARY_FLAG uint = 128
+
+const ENUM_FLAG uint = 256
+const AUTO_INCREMENT_FLAG uint = 512
+const TIMESTAMP_FLAG uint = 1024
+const SET_FLAG uint = 2048
+const NO_DEFAULT_VALUE_FLAG uint = 4096
+const ON_UPDATE_NOW_FLAG uint = 8192
+const NUM_FLAG uint = 32768
+const PART_KEY_FLAG uint = 16384
+const GROUP_FLAG uint = 32768
+const UNIQUE_FLAG uint = 65536
+const BINCMP_FLAG uint = 131072
+const GET_FIXED_FIELDS_FLAG uint = 1 << 18
+const FIELD_IN_PART_FUNC_FLAG uint = 1 << 19
+
+const FIELD_IN_ADD_INDEX uint = 1 << 20
+const FIELD_IS_RENAMED uint = 1 << 21
+const FIELD_FLAGS_STORAGE_MEDIA uint = 22
+const FIELD_FLAGS_STORAGE_MEDIA_MASK uint = 3 << FIELD_FLAGS_STORAGE_MEDIA
+const FIELD_FLAGS_COLUMN_FORMAT uint = 24
+const FIELD_FLAGS_COLUMN_FORMAT_MASK uint = 3 << FIELD_FLAGS_COLUMN_FORMAT
+const FIELD_IS_DROPPED uint = 1 << 26
+
+const MAX_TINYINT_WIDTH uint = 3
+const MAX_SMALLINT_WIDTH uint = 5
+const MAX_MEDIUMINT_WIDTH uint = 8
+const MAX_INT_WIDTH uint = 10
+const MAX_BIGINT_WIDTH uint = 20
+const MAX_CHAR_WIDTH uint = 255
+const MAX_BLOB_WIDTH uint = 16777216
+
+const packet_error uint = 0
+
+const MYSQL_SHUTDOWN_KILLABLE_CONNECT uint = (char)(1 << 0)
+const MYSQL_SHUTDOWN_KILLABLE_TRANS uint = (char)(1 << 1)
+const MYSQL_SHUTDOWN_KILLABLE_LOCK_TABLE uint = (char)(1 << 2)
+const MYSQL_SHUTDOWN_KILLABLE_UPDATE uint = (char)(1 << 3)
+
+const SHUTDOWN_DEFAULT uint = 0
+const SHUTDOWN_WAIT_CONNECTIONS uint = MYSQL_SHUTDOWN_KILLABLE_CONNECT
+const SHUTDOWN_WAIT_TRANSACTIONS uint = MYSQL_SHUTDOWN_KILLABLE_TRANS
+const SHUTDOWN_WAIT_UPDATES uint = MYSQL_SHUTDOWN_KILLABLE_UPDATE
+const SHUTDOWN_WAIT_ALL_BUFFERS uint = MYSQL_SHUTDOWN_KILLABLE_UPDATE << 1
+const SHUTDOWN_WAIT_CRITICAL_BUFFERS uint = (MYSQL_SHUTDOWN_KILLABLE_UPDATE << 1) + 1
+const KILL_QUERY uint = 254
+const KILL_CONNECTION uint = 255
+
+const STRING_RESULT uint = 0
+const REAL_RESULT uint = 1
+const INT_RESULT uint = 2
+const ROW_RESULT uint = 3
+const DECIMAL_RESULT uint = 4
+
+const NET_HEADER_SIZE uint = 4
+const COMP_HEADER_SIZE uint = 3
+
+const NULL_LENGTH uint = ^0
+const MYSQL_STMT_HEADER uint = 4
+const MYSQL_LONG_DATA_HEADER uint = 6
+
+const NOT_FIXED_DEC uint = 31

@@ -15,3 +15,15 @@ func BuildFixedLengthString(value string, size ...uint) (data []byte) {
     copy(data, []byte(value[:datasize]))
     return data
 }
+
+func (packet Packet) GetFixedLengthString(size ...uint) (value string) {
+    var datasize uint
+    if len(size) == 0 {
+        datasize = uint(len(packet.data)) - packet.offset
+    } else {
+        datasize = size[0]
+    }
+    value = string(packet.data[packet.offset: packet.offset + datasize])
+    packet.offset += datasize
+    return value
+}
