@@ -6,9 +6,9 @@ func BuildFixedLengthInteger1(value uint8) (data [1]byte) {
 }
 
 func (packet Packet) GetFixedLengthInteger1() (value uint8) {
-    value |= uint8(packet.data[packet.offset] & 0xFF)
-    packet.offset += 1
-    return value
+	value |= uint8(packet.data[packet.offset] & 0xFF)
+	packet.offset += 1
+	return value
 }
 
 func BuildFixedLengthInteger2(value uint16) (data [2]byte) {
@@ -18,10 +18,10 @@ func BuildFixedLengthInteger2(value uint16) (data [2]byte) {
 }
 
 func (packet Packet) GetFixedLengthInteger2() (value uint16) {
-    value |= uint16(packet.data[packet.offset+1] & 0xFF) << 8
-    value |= uint16(packet.data[packet.offset] & 0xFF)
-    packet.offset += 2
-    return value
+	value |= uint16(packet.data[packet.offset+1]&0xFF) << 8
+	value |= uint16(packet.data[packet.offset] & 0xFF)
+	packet.offset += 2
+	return value
 }
 
 func BuildFixedLengthInteger3(value uint32) (data [3]byte) {
@@ -32,11 +32,11 @@ func BuildFixedLengthInteger3(value uint32) (data [3]byte) {
 }
 
 func (packet Packet) GetFixedLengthInteger3() (value uint32) {
-    value |= uint32(packet.data[packet.offset+2] & 0xFF) << 16
-    value |= uint32(packet.data[packet.offset+1] & 0xFF) << 8
-    value |= uint32(packet.data[packet.offset] & 0xFF)
-    packet.offset += 3
-    return value
+	value |= uint32(packet.data[packet.offset+2]&0xFF) << 16
+	value |= uint32(packet.data[packet.offset+1]&0xFF) << 8
+	value |= uint32(packet.data[packet.offset] & 0xFF)
+	packet.offset += 3
+	return value
 }
 
 func BuildFixedLengthInteger4(value uint32) (data [4]byte) {
@@ -48,12 +48,12 @@ func BuildFixedLengthInteger4(value uint32) (data [4]byte) {
 }
 
 func (packet Packet) GetFixedLengthInteger4() (value uint32) {
-    value |= uint32(packet.data[packet.offset+3] & 0xFF) << 24
-    value |= uint32(packet.data[packet.offset+2] & 0xFF) << 16
-    value |= uint32(packet.data[packet.offset+1] & 0xFF) << 8
-    value |= uint32(packet.data[packet.offset] & 0xFF)
-    packet.offset += 4
-    return value
+	value |= uint32(packet.data[packet.offset+3]&0xFF) << 24
+	value |= uint32(packet.data[packet.offset+2]&0xFF) << 16
+	value |= uint32(packet.data[packet.offset+1]&0xFF) << 8
+	value |= uint32(packet.data[packet.offset] & 0xFF)
+	packet.offset += 4
+	return value
 }
 
 func BuildFixedLengthInteger6(value uint64) (data [6]byte) {
@@ -67,14 +67,14 @@ func BuildFixedLengthInteger6(value uint64) (data [6]byte) {
 }
 
 func (packet Packet) GetFixedLengthInteger6() (value uint64) {
-    value |= uint64(packet.data[packet.offset+5] & 0xFF) << 40
-    value |= uint64(packet.data[packet.offset+4] & 0xFF) << 32
-    value |= uint64(packet.data[packet.offset+3] & 0xFF) << 24
-    value |= uint64(packet.data[packet.offset+2] & 0xFF) << 16
-    value |= uint64(packet.data[packet.offset+1] & 0xFF) << 8
-    value |= uint64(packet.data[packet.offset] & 0xFF)
-    packet.offset += 6
-    return value
+	value |= uint64(packet.data[packet.offset+5]&0xFF) << 40
+	value |= uint64(packet.data[packet.offset+4]&0xFF) << 32
+	value |= uint64(packet.data[packet.offset+3]&0xFF) << 24
+	value |= uint64(packet.data[packet.offset+2]&0xFF) << 16
+	value |= uint64(packet.data[packet.offset+1]&0xFF) << 8
+	value |= uint64(packet.data[packet.offset] & 0xFF)
+	packet.offset += 6
+	return value
 }
 
 func BuildFixedLengthInteger8(value uint64) (data [8]byte) {
@@ -90,14 +90,14 @@ func BuildFixedLengthInteger8(value uint64) (data [8]byte) {
 }
 
 func (packet Packet) GetFixedLengthInteger8() (value uint64) {
-    value |= uint64(packet.data[packet.offset+7] & 0xFF) << 56
-    value |= uint64(packet.data[packet.offset+6] & 0xFF) << 48
-    value |= uint64(packet.data[packet.offset+5] & 0xFF) << 40
-    value |= uint64(packet.data[packet.offset+4] & 0xFF) << 32
-    value |= uint64(packet.data[packet.offset+3] & 0xFF) << 24
-    value |= uint64(packet.data[packet.offset+2] & 0xFF) << 16
-    value |= uint64(packet.data[packet.offset+1] & 0xFF) << 8
-    value |= uint64(packet.data[packet.offset] & 0xFF)
-    packet.offset += 8
-    return value
+	value |= uint64(packet.data[packet.offset+7]&0xFF) << 56
+	value |= uint64(packet.data[packet.offset+6]&0xFF) << 48
+	value |= uint64(packet.data[packet.offset+5]&0xFF) << 40
+	value |= uint64(packet.data[packet.offset+4]&0xFF) << 32
+	value |= uint64(packet.data[packet.offset+3]&0xFF) << 24
+	value |= uint64(packet.data[packet.offset+2]&0xFF) << 16
+	value |= uint64(packet.data[packet.offset+1]&0xFF) << 8
+	value |= uint64(packet.data[packet.offset] & 0xFF)
+	packet.offset += 8
+	return value
 }
