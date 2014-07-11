@@ -284,10 +284,10 @@ const MAX_BLOB_WIDTH uint = 16777216
 
 const packet_error uint = 0
 
-const MYSQL_SHUTDOWN_KILLABLE_CONNECT uint = (char)(1 << 0)
-const MYSQL_SHUTDOWN_KILLABLE_TRANS uint = (char)(1 << 1)
-const MYSQL_SHUTDOWN_KILLABLE_LOCK_TABLE uint = (char)(1 << 2)
-const MYSQL_SHUTDOWN_KILLABLE_UPDATE uint = (char)(1 << 3)
+const MYSQL_SHUTDOWN_KILLABLE_CONNECT uint = 1 << 0
+const MYSQL_SHUTDOWN_KILLABLE_TRANS uint = 1 << 1
+const MYSQL_SHUTDOWN_KILLABLE_LOCK_TABLE uint = 1 << 2
+const MYSQL_SHUTDOWN_KILLABLE_UPDATE uint = 1 << 3
 
 const SHUTDOWN_DEFAULT uint = 0
 const SHUTDOWN_WAIT_CONNECTIONS uint = MYSQL_SHUTDOWN_KILLABLE_CONNECT
@@ -307,7 +307,7 @@ const DECIMAL_RESULT uint = 4
 const NET_HEADER_SIZE uint = 4
 const COMP_HEADER_SIZE uint = 3
 
-const NULL_LENGTH uint = ^0
+const NULL_LENGTH int = ^0
 const MYSQL_STMT_HEADER uint = 4
 const MYSQL_LONG_DATA_HEADER uint = 6
 
