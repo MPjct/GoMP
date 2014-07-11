@@ -25,6 +25,8 @@ const NET_READ_TIMEOUT uint = 30
 const NET_WRITE_TIMEOUT uint = 60
 const NET_WAIT_TIMEOUT uint = 8 * 60 * 60
 
+const MAX_PACKET_SIZE uint = 16777215
+
 const ONLY_KILL_QUERY uint = 1
 
 const LOCAL_HOST string = "localhost"

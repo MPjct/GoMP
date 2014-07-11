@@ -5,7 +5,7 @@ func BuildFixedLengthInteger1(value uint8) (data [1]byte) {
 	return data
 }
 
-func (packet Packet) GetFixedLengthInteger1() (value uint8) {
+func (packet Proto) GetFixedLengthInteger1() (value uint8) {
 	value |= uint8(packet.data[packet.offset] & 0xFF)
 	packet.offset += 1
 	return value
@@ -17,7 +17,7 @@ func BuildFixedLengthInteger2(value uint16) (data [2]byte) {
 	return data
 }
 
-func (packet Packet) GetFixedLengthInteger2() (value uint16) {
+func (packet Proto) GetFixedLengthInteger2() (value uint16) {
 	value |= uint16(packet.data[packet.offset+1]&0xFF) << 8
 	value |= uint16(packet.data[packet.offset] & 0xFF)
 	packet.offset += 2
@@ -31,7 +31,7 @@ func BuildFixedLengthInteger3(value uint32) (data [3]byte) {
 	return data
 }
 
-func (packet Packet) GetFixedLengthInteger3() (value uint32) {
+func (packet Proto) GetFixedLengthInteger3() (value uint32) {
 	value |= uint32(packet.data[packet.offset+2]&0xFF) << 16
 	value |= uint32(packet.data[packet.offset+1]&0xFF) << 8
 	value |= uint32(packet.data[packet.offset] & 0xFF)
@@ -47,7 +47,7 @@ func BuildFixedLengthInteger4(value uint32) (data [4]byte) {
 	return data
 }
 
-func (packet Packet) GetFixedLengthInteger4() (value uint32) {
+func (packet Proto) GetFixedLengthInteger4() (value uint32) {
 	value |= uint32(packet.data[packet.offset+3]&0xFF) << 24
 	value |= uint32(packet.data[packet.offset+2]&0xFF) << 16
 	value |= uint32(packet.data[packet.offset+1]&0xFF) << 8
@@ -66,7 +66,7 @@ func BuildFixedLengthInteger6(value uint64) (data [6]byte) {
 	return data
 }
 
-func (packet Packet) GetFixedLengthInteger6() (value uint64) {
+func (packet Proto) GetFixedLengthInteger6() (value uint64) {
 	value |= uint64(packet.data[packet.offset+5]&0xFF) << 40
 	value |= uint64(packet.data[packet.offset+4]&0xFF) << 32
 	value |= uint64(packet.data[packet.offset+3]&0xFF) << 24
@@ -89,7 +89,7 @@ func BuildFixedLengthInteger8(value uint64) (data [8]byte) {
 	return data
 }
 
-func (packet Packet) GetFixedLengthInteger8() (value uint64) {
+func (packet Proto) GetFixedLengthInteger8() (value uint64) {
 	value |= uint64(packet.data[packet.offset+7]&0xFF) << 56
 	value |= uint64(packet.data[packet.offset+6]&0xFF) << 48
 	value |= uint64(packet.data[packet.offset+5]&0xFF) << 40

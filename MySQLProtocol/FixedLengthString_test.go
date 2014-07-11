@@ -36,7 +36,7 @@ func Benchmark_BuildFixedLengthString(b *testing.B) {
 }
 
 func Test_GetFixedLengthString(t *testing.T) {
-	var packet Packet
+	var packet Proto
 	var values = []struct {
 		in  []byte
 		out string
@@ -47,13 +47,13 @@ func Test_GetFixedLengthString(t *testing.T) {
 	}
 
 	for _, value := range values {
-		packet = Packet{data: value.in}
+		packet = Proto{data: value.in}
 		assert.Equal(t, packet.GetFixedLengthString(), value.out, "")
 	}
 }
 
 func Benchmark_GetFixedLengthString(b *testing.B) {
-	packet := Packet{data: []byte{0x41, 0x42, 0x43}}
+	packet := Proto{data: []byte{0x41, 0x42, 0x43}}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		packet.offset = 0

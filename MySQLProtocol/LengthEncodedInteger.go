@@ -37,7 +37,7 @@ func BuildLengthEncodedInteger(value uint64) (data []byte) {
 	return data
 }
 
-func (packet Packet) GetLengthEncodedInteger() (value uint64) {
+func (packet Proto) GetLengthEncodedInteger() (value uint64) {
 	switch packet.data[packet.offset] {
 	case 0xFC:
 		packet.offset++

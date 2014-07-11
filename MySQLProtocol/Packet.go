@@ -1,10 +1,6 @@
 package MySQLProtocol
 
 type Packet struct {
-	data   []byte
-	offset uint
+	sequence_id uint8
 }
 
-func (packet Packet) HasRemainingData() bool {
-	return uint(len(packet.data))-packet.offset > 0
-}

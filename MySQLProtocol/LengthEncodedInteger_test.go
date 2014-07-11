@@ -28,7 +28,7 @@ func Benchmark_BuildLengthEncodedInteger(b *testing.B) {
 }
 
 func Test_GetLengthEncodedInteger(t *testing.T) {
-	var packet Packet
+	var packet Proto
 	var values = []struct {
 		in  []byte
 		out uint64
@@ -40,13 +40,13 @@ func Test_GetLengthEncodedInteger(t *testing.T) {
 	}
 
 	for _, value := range values {
-		packet = Packet{data: value.in}
+		packet = Proto{data: value.in}
 		assert.Equal(t, packet.GetLengthEncodedInteger(), value.out, "")
 	}
 }
 
 func Benchmark_GetLengthEncodedInteger(b *testing.B) {
-	packet := Packet{data: []byte{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}}
+	packet := Proto{data: []byte{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		packet.GetLengthEncodedInteger()

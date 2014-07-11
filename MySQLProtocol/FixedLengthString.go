@@ -16,7 +16,7 @@ func BuildFixedLengthString(value string, size ...uint) (data []byte) {
 	return data
 }
 
-func (packet Packet) GetFixedLengthString(size ...uint) (value string) {
+func (packet Proto) GetFixedLengthString(size ...uint) (value string) {
 	var datasize uint
 	if len(size) == 0 {
 		datasize = uint(len(packet.data)) - packet.offset

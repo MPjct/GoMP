@@ -6,7 +6,7 @@ func BuildNulTerminatedString(value string) (data []byte) {
 	return data
 }
 
-func (packet Packet) GetNulTerminatedString() (value string) {
+func (packet Proto) GetNulTerminatedString() (value string) {
 	var strlen uint
 	for packet.data[packet.offset+strlen] != 0x00 {
 		strlen++

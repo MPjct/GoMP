@@ -23,7 +23,7 @@ func Benchmark_BuildFixedLengthInteger1(b *testing.B) {
 }
 
 func Test_GetFixedLengthInteger1(t *testing.T) {
-	var packet Packet
+	var packet Proto
 	var values = []struct {
 		in  []byte
 		out uint8
@@ -34,13 +34,13 @@ func Test_GetFixedLengthInteger1(t *testing.T) {
 	}
 
 	for _, value := range values {
-		packet = Packet{data: value.in}
+		packet = Proto{data: value.in}
 		assert.Equal(t, packet.GetFixedLengthInteger1(), value.out, "")
 	}
 }
 
 func Benchmark_GetFixedLengthInteger1(b *testing.B) {
-	packet := Packet{data: []byte{0x0}}
+	packet := Proto{data: []byte{0x0}}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		packet.GetFixedLengthInteger1()
@@ -67,7 +67,7 @@ func Benchmark_BuildFixedLengthInteger2(b *testing.B) {
 }
 
 func Test_GetFixedLengthInteger2(t *testing.T) {
-	var packet Packet
+	var packet Proto
 	var values = []struct {
 		in  []byte
 		out uint16
@@ -78,13 +78,13 @@ func Test_GetFixedLengthInteger2(t *testing.T) {
 	}
 
 	for _, value := range values {
-		packet = Packet{data: value.in}
+		packet = Proto{data: value.in}
 		assert.Equal(t, packet.GetFixedLengthInteger2(), value.out, "")
 	}
 }
 
 func Benchmark_GetFixedLengthInteger2(b *testing.B) {
-	packet := Packet{data: []byte{0x0, 0x0}}
+	packet := Proto{data: []byte{0x0, 0x0}}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		packet.GetFixedLengthInteger2()
@@ -111,7 +111,7 @@ func Benchmark_BuildFixedLengthInteger3(b *testing.B) {
 }
 
 func Test_GetFixedLengthInteger3(t *testing.T) {
-	var packet Packet
+	var packet Proto
 	var values = []struct {
 		in  []byte
 		out uint32
@@ -122,13 +122,13 @@ func Test_GetFixedLengthInteger3(t *testing.T) {
 	}
 
 	for _, value := range values {
-		packet = Packet{data: value.in}
+		packet = Proto{data: value.in}
 		assert.Equal(t, packet.GetFixedLengthInteger3(), value.out, "")
 	}
 }
 
 func Benchmark_GetFixedLengthInteger3(b *testing.B) {
-	packet := Packet{data: []byte{0x0, 0x0, 0x0}}
+	packet := Proto{data: []byte{0x0, 0x0, 0x0}}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		packet.GetFixedLengthInteger3()
@@ -155,7 +155,7 @@ func Benchmark_BuildFixedLengthInteger4(b *testing.B) {
 }
 
 func Test_GetFixedLengthInteger4(t *testing.T) {
-	var packet Packet
+	var packet Proto
 	var values = []struct {
 		in  []byte
 		out uint32
@@ -166,13 +166,13 @@ func Test_GetFixedLengthInteger4(t *testing.T) {
 	}
 
 	for _, value := range values {
-		packet = Packet{data: value.in}
+		packet = Proto{data: value.in}
 		assert.Equal(t, packet.GetFixedLengthInteger4(), value.out, "")
 	}
 }
 
 func Benchmark_GetFixedLengthInteger4(b *testing.B) {
-	packet := Packet{data: []byte{0x0, 0x0, 0x0, 0x0}}
+	packet := Proto{data: []byte{0x0, 0x0, 0x0, 0x0}}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		packet.GetFixedLengthInteger4()
@@ -199,7 +199,7 @@ func Benchmark_BuildFixedLengthInteger6(b *testing.B) {
 }
 
 func Test_GetFixedLengthInteger6(t *testing.T) {
-	var packet Packet
+	var packet Proto
 	var values = []struct {
 		in  []byte
 		out uint64
@@ -210,13 +210,13 @@ func Test_GetFixedLengthInteger6(t *testing.T) {
 	}
 
 	for _, value := range values {
-		packet = Packet{data: value.in}
+		packet = Proto{data: value.in}
 		assert.Equal(t, packet.GetFixedLengthInteger6(), value.out, "")
 	}
 }
 
 func Benchmark_GetFixedLengthInteger6(b *testing.B) {
-	packet := Packet{data: []byte{0x0, 0x0, 0x0, 0x0, 0x0, 0x0}}
+	packet := Proto{data: []byte{0x0, 0x0, 0x0, 0x0, 0x0, 0x0}}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		packet.GetFixedLengthInteger6()
@@ -243,7 +243,7 @@ func Benchmark_BuildFixedLengthInteger8(b *testing.B) {
 }
 
 func Test_GetFixedLengthInteger8(t *testing.T) {
-	var packet Packet
+	var packet Proto
 	var values = []struct {
 		in  []byte
 		out uint64
@@ -254,13 +254,13 @@ func Test_GetFixedLengthInteger8(t *testing.T) {
 	}
 
 	for _, value := range values {
-		packet = Packet{data: value.in}
+		packet = Proto{data: value.in}
 		assert.Equal(t, packet.GetFixedLengthInteger8(), value.out, "")
 	}
 }
 
 func Benchmark_GetFixedLengthInteger8(b *testing.B) {
-	packet := Packet{data: []byte{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}}
+	packet := Proto{data: []byte{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		packet.GetFixedLengthInteger8()
