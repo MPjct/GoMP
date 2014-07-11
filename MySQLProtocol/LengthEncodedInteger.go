@@ -37,18 +37,18 @@ func BuildLengthEncodedInteger(value uint64) (data []byte) {
 	return data
 }
 
-func (packet Proto) GetLengthEncodedInteger() (value uint64) {
-	switch packet.data[packet.offset] {
+func (proto Proto) GetLengthEncodedInteger() (value uint64) {
+	switch proto.data[proto.offset] {
 	case 0xFC:
-		packet.offset++
-		return uint64(packet.GetFixedLengthInteger2())
+		proto.offset++
+		return uint64(proto.GetFixedLengthInteger2())
 	case 0xFD:
-		packet.offset++
-		return uint64(packet.GetFixedLengthInteger3())
+		proto.offset++
+		return uint64(proto.GetFixedLengthInteger3())
 	case 0xFE:
-		packet.offset++
-		return uint64(packet.GetFixedLengthInteger8())
+		proto.offset++
+		return uint64(proto.GetFixedLengthInteger8())
 	default:
-		return uint64(packet.GetFixedLengthInteger1())
+		return uint64(proto.GetFixedLengthInteger1())
 	}
 }

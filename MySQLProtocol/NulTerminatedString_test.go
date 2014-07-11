@@ -26,7 +26,7 @@ func Benchmark_BuildNulTerminatedString(b *testing.B) {
 }
 
 func Test_GetNulTerminatedString(t *testing.T) {
-	var packet Proto
+	var proto Proto
 	var values = []struct {
 		in  []byte
 		out string
@@ -37,16 +37,16 @@ func Test_GetNulTerminatedString(t *testing.T) {
 	}
 
 	for _, value := range values {
-		packet = Proto{data: value.in}
-		assert.Equal(t, packet.GetNulTerminatedString(), value.out, "")
+		proto = Proto{data: value.in}
+		assert.Equal(t, proto.GetNulTerminatedString(), value.out, "")
 	}
 }
 
 func Benchmark_GetNulTerminatedString(b *testing.B) {
-	packet := Proto{data: []byte{0x41, 0x42, 0x43, 0x0}}
+	proto := Proto{data: []byte{0x41, 0x42, 0x43, 0x0}}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		packet.offset = 0
-		packet.GetNulTerminatedString()
+		proto.offset = 0
+		proto.GetNulTerminatedString()
 	}
 }

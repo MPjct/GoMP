@@ -5,6 +5,6 @@ type Proto struct {
 	offset uint
 }
 
-func (packet Proto) HasRemainingData() bool {
-	return uint(len(packet.data))-packet.offset > 0
+func (proto Proto) HasRemainingData() bool {
+	return uint(len(proto.data))-proto.offset > 0
 }
