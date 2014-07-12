@@ -10,7 +10,7 @@ type Packet_ERR struct {
 func (packet Packet_ERR) GetPacketSize(context Context) (size uint64) {
     size += 1
     size += 2
-    if Has_Flag(context.client_capability, CLIENT_PROTOCOL_41) {
+    if Has_Flag(context.capability, CLIENT_PROTOCOL_41) {
         size += 1
         size += 5
     }
@@ -26,7 +26,7 @@ func (packet Packet_ERR) ToPacket(context Context) (data []byte) {
     data = append(data, BuildFixedLengthInteger1(packet.sequence_id)...)
     data = append(data, 0xFF)
     data = append(data, BuildFixedLengthInteger2(packet.err_code)...)
-    if Has_Flag(context.client_capability, CLIENT_PROTOCOL_41) {
+    if Has_Flag(context.capability, CLIENT_PROTOCOL_41) {
         data = append(data, BuildFixedLengthString("#", 1)...)
         data = append(data, BuildFixedLengthString(packet.sql_state, 5)...)
     }
@@ -39,7 +39,7 @@ func (packet *Packet_ERR) FromPacket(context Context, data Proto) {
     packet.sequence_id = data.GetFixedLengthInteger1()
     data.GetFixedLengthInteger1()
     packet.err_code = data.GetFixedLengthInteger2()
-    if Has_Flag(context.client_capability, CLIENT_PROTOCOL_41) {
+    if Has_Flag(context.capability, CLIENT_PROTOCOL_41) {
         data.GetFixedLengthInteger1()
         packet.sql_state = data.GetFixedLengthString(5)
     }

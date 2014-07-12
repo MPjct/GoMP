@@ -14,7 +14,7 @@ func Test_Packet_ERR(t *testing.T) {
         0x74, 0x61, 0x62, 0x6c, 0x65, 0x73, 0x20, 0x75,
         0x73, 0x65, 0x64,
         }},
-        context: Context{client_capability: CLIENT_PROTOCOL_41}},
+        context: Context{capability: CLIENT_PROTOCOL_41}},
 	}
     var pkt Packet_ERR
 
@@ -26,7 +26,7 @@ func Test_Packet_ERR(t *testing.T) {
 }
 
 func Benchmark_Packet_ERR_FromPacket(b *testing.B) {
-    context := Context{client_capability: CLIENT_PROTOCOL_41}
+    context := Context{capability: CLIENT_PROTOCOL_41}
     var pkt Packet_ERR
     var packet = Proto{data: []byte{
     0x17, 0x00, 0x00, 0x01, 0xff, 0x48, 0x04, 0x23,
@@ -42,7 +42,7 @@ func Benchmark_Packet_ERR_FromPacket(b *testing.B) {
 }
 
 func Benchmark_Packet_ERR_GetPacketSize(b *testing.B) {
-    context := Context{client_capability: CLIENT_PROTOCOL_41}
+    context := Context{capability: CLIENT_PROTOCOL_41}
     pkt := Packet_ERR{}
     var packet = Proto{data: []byte{
     0x17, 0x00, 0x00, 0x01, 0xff, 0x48, 0x04, 0x23,
@@ -57,7 +57,7 @@ func Benchmark_Packet_ERR_GetPacketSize(b *testing.B) {
 }
 
 func Benchmark_Packet_ERR_ToPacket(b *testing.B) {
-    context := Context{client_capability: CLIENT_PROTOCOL_41}
+    context := Context{capability: CLIENT_PROTOCOL_41}
     pkt := Packet_ERR{}
     var packet = Proto{data: []byte{
     0x17, 0x00, 0x00, 0x01, 0xff, 0x48, 0x04, 0x23,

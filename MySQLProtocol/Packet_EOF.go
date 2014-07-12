@@ -8,7 +8,7 @@ type Packet_EOF struct {
 
 func (packet Packet_EOF) GetPacketSize(context Context) (size uint64) {
     size += 1
-    if Has_Flag(context.client_capability, CLIENT_PROTOCOL_41) {
+    if Has_Flag(context.capability, CLIENT_PROTOCOL_41) {
         size += 2
         size += 2
     }
@@ -22,7 +22,7 @@ func (packet Packet_EOF) ToPacket(context Context) (data []byte) {
     data = append(data, BuildFixedLengthInteger3(uint32(size))...)
     data = append(data, BuildFixedLengthInteger1(packet.sequence_id)...)
     data = append(data, 0xFE)
-    if Has_Flag(context.client_capability, CLIENT_PROTOCOL_41) {
+    if Has_Flag(context.capability, CLIENT_PROTOCOL_41) {
         data = append(data, BuildFixedLengthInteger2(packet.warning_count)...)
         data = append(data, BuildFixedLengthInteger2(packet.status_flags)...)
     }
@@ -33,7 +33,7 @@ func (packet *Packet_EOF) FromPacket(context Context, data Proto) {
     data.GetFixedLengthInteger3()
     packet.sequence_id = data.GetFixedLengthInteger1()
     data.GetFixedLengthInteger1()
-    if Has_Flag(context.client_capability, CLIENT_PROTOCOL_41) {
+    if Has_Flag(context.capability, CLIENT_PROTOCOL_41) {
         packet.warning_count = data.GetFixedLengthInteger2()
         packet.status_flags = data.GetFixedLengthInteger2()
     }
