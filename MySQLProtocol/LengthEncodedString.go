@@ -8,6 +8,11 @@ func BuildLengthEncodedString(value string) (data []byte) {
 	return data
 }
 
+func (proto Proto) GetLengthEncodedString() (value string) {
+    strlen := uint(proto.GetLengthEncodedInteger())
+    return proto.GetFixedLengthString(strlen)
+}
+
 func GetLengthEncodedStringSize(value string) uint64 {
     return GetLengthEncodedIntegerSize(uint64(len(value))) + uint64(len(value))
 }

@@ -1,5 +1,7 @@
 package MySQLProtocol
 
+import "fmt"
+
 type Packet_OK struct {
     Packet
     affected_rows uint64
@@ -14,7 +16,7 @@ func (packet Packet_OK) ToPacket(context Context) (data []byte) {
     var size uint64
     
     // Figure out size
-    size = 4
+    size = 1
     size += GetLengthEncodedIntegerSize(packet.affected_rows)
     size += GetLengthEncodedIntegerSize(packet.last_insert_id)
     if Has_Flag(context.client_capability, CLIENT_PROTOCOL_41) {
@@ -32,10 +34,10 @@ func (packet Packet_OK) ToPacket(context Context) (data []byte) {
         size += uint64(len(packet.info))
     }
     
-    data = make([]byte, 0, size)
-    data = append(data, 0x00)
+    data = make([]byte, 0, size+3)
     data = append(data, BuildFixedLengthInteger3(uint32(size))...)
     data = append(data, BuildFixedLengthInteger1(packet.sequence_id)...)
+    data = append(data, 0x00)
     data = append(data, BuildLengthEncodedInteger(packet.affected_rows)...)
     data = append(data, BuildLengthEncodedInteger(packet.last_insert_id)...)
     
@@ -56,4 +58,31 @@ func (packet Packet_OK) ToPacket(context Context) (data []byte) {
     }
     
     return data
+}
+
+func (packet Packet_OK) FromPacket(context Context, data Proto) {
+    fmt.Println("data.offset", data.offset)
+    data.GetFixedLengthInteger3()
+    fmt.Println("data.offset", data.offset)
+    packet.sequence_id = data.GetFixedLengthInteger1()
+    fmt.Println("data.offset", data.offset)
+    data.GetFixedLengthInteger1()
+    fmt.Println("data.offset", data.offset)
+    packet.affected_rows = data.GetLengthEncodedInteger()
+    packet.last_insert_id = data.GetLengthEncodedInteger()
+    if Has_Flag(context.client_capability, CLIENT_PROTOCOL_41) {
+        packet.status_flags = data.GetFixedLengthInteger2()
+        packet.warnings = data.GetFixedLengthInteger2()
+    } else if Has_Flag(context.client_capability, CLIENT_TRANSACTIONS) {
+        packet.status_flags = data.GetFixedLengthInteger2()
+    }
+    
+    if Has_Flag(context.client_capability, CLIENT_SESSION_TRACK) {
+        packet.info = data.GetLengthEncodedString()
+        if len(packet.session_state_change) > 0 {
+            packet.session_state_change =  data.GetLengthEncodedString()
+        }
+    } else {
+        packet.info = data.GetFixedLengthString()
+    }
 }

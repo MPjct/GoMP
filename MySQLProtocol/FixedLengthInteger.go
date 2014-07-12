@@ -1,5 +1,7 @@
 package MySQLProtocol
 
+import "fmt"
+
 func BuildFixedLengthInteger1(value uint8) (data []byte) {
     data = make([]byte, 1)
 	data[0] = byte(value >> 0 & 0xFF)
@@ -35,10 +37,12 @@ func BuildFixedLengthInteger3(value uint32) (data []byte) {
 }
 
 func (proto Proto) GetFixedLengthInteger3() (value uint32) {
+    fmt.Println("proto.offset ", proto.offset)
 	value |= uint32(proto.data[proto.offset+2]&0xFF) << 16
 	value |= uint32(proto.data[proto.offset+1]&0xFF) << 8
 	value |= uint32(proto.data[proto.offset] & 0xFF)
 	proto.offset += 3
+    fmt.Println("proto.offset ", proto.offset)
 	return value
 }
 
