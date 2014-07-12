@@ -3,8 +3,6 @@ package MySQLProtocol
 import "testing"
 import "github.com/stretchr/testify/assert"
 
-import "fmt"
-
 func Test_Packet_OK(t *testing.T) {
 	var values = []struct {
 		packet  Proto
@@ -18,7 +16,6 @@ func Test_Packet_OK(t *testing.T) {
 	for _, value := range values {
         pkt = Packet_OK{}
         pkt.FromPacket(value.context, value.packet)
-        fmt.Println(pkt)
 		assert.Equal(t, pkt.ToPacket(value.context), value.packet.data, "")
 	}
 }

@@ -5,6 +5,6 @@ type Proto struct {
 	offset uint
 }
 
-func (proto Proto) HasRemainingData() bool {
+func (proto *Proto) HasRemainingData() bool {
 	return uint(len(proto.data))-proto.offset > 0
 }

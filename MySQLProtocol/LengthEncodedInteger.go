@@ -37,7 +37,7 @@ func BuildLengthEncodedInteger(value uint64) (data []byte) {
 	return data
 }
 
-func (proto Proto) GetLengthEncodedInteger() (value uint64) {
+func (proto *Proto) GetLengthEncodedInteger() (value uint64) {
 	switch proto.data[proto.offset] {
 	case 0xFC:
 		proto.offset++

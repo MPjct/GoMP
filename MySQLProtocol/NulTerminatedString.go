@@ -6,7 +6,7 @@ func BuildNulTerminatedString(value string) (data []byte) {
 	return data
 }
 
-func (proto Proto) GetNulTerminatedString() (value string) {
+func (proto *Proto) GetNulTerminatedString() (value string) {
 	var strlen uint
 	for proto.data[proto.offset+strlen] != 0x00 {
 		strlen++

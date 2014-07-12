@@ -1,14 +1,12 @@
 package MySQLProtocol
 
-import "fmt"
-
 func BuildFixedLengthInteger1(value uint8) (data []byte) {
     data = make([]byte, 1)
 	data[0] = byte(value >> 0 & 0xFF)
 	return data
 }
 
-func (proto Proto) GetFixedLengthInteger1() (value uint8) {
+func (proto *Proto) GetFixedLengthInteger1() (value uint8) {
 	value |= uint8(proto.data[proto.offset] & 0xFF)
 	proto.offset += 1
 	return value
@@ -21,7 +19,7 @@ func BuildFixedLengthInteger2(value uint16) (data []byte) {
 	return data
 }
 
-func (proto Proto) GetFixedLengthInteger2() (value uint16) {
+func (proto *Proto) GetFixedLengthInteger2() (value uint16) {
 	value |= uint16(proto.data[proto.offset+1]&0xFF) << 8
 	value |= uint16(proto.data[proto.offset] & 0xFF)
 	proto.offset += 2
@@ -36,13 +34,11 @@ func BuildFixedLengthInteger3(value uint32) (data []byte) {
 	return data
 }
 
-func (proto Proto) GetFixedLengthInteger3() (value uint32) {
-    fmt.Println("proto.offset ", proto.offset)
+func (proto *Proto) GetFixedLengthInteger3() (value uint32) {
 	value |= uint32(proto.data[proto.offset+2]&0xFF) << 16
 	value |= uint32(proto.data[proto.offset+1]&0xFF) << 8
 	value |= uint32(proto.data[proto.offset] & 0xFF)
 	proto.offset += 3
-    fmt.Println("proto.offset ", proto.offset)
 	return value
 }
 
@@ -55,7 +51,7 @@ func BuildFixedLengthInteger4(value uint32) (data []byte) {
 	return data
 }
 
-func (proto Proto) GetFixedLengthInteger4() (value uint32) {
+func (proto *Proto) GetFixedLengthInteger4() (value uint32) {
 	value |= uint32(proto.data[proto.offset+3]&0xFF) << 24
 	value |= uint32(proto.data[proto.offset+2]&0xFF) << 16
 	value |= uint32(proto.data[proto.offset+1]&0xFF) << 8
@@ -75,7 +71,7 @@ func BuildFixedLengthInteger6(value uint64) (data []byte) {
 	return data
 }
 
-func (proto Proto) GetFixedLengthInteger6() (value uint64) {
+func (proto *Proto) GetFixedLengthInteger6() (value uint64) {
 	value |= uint64(proto.data[proto.offset+5]&0xFF) << 40
 	value |= uint64(proto.data[proto.offset+4]&0xFF) << 32
 	value |= uint64(proto.data[proto.offset+3]&0xFF) << 24
@@ -99,7 +95,7 @@ func BuildFixedLengthInteger8(value uint64) (data []byte) {
 	return data
 }
 
-func (proto Proto) GetFixedLengthInteger8() (value uint64) {
+func (proto *Proto) GetFixedLengthInteger8() (value uint64) {
 	value |= uint64(proto.data[proto.offset+7]&0xFF) << 56
 	value |= uint64(proto.data[proto.offset+6]&0xFF) << 48
 	value |= uint64(proto.data[proto.offset+5]&0xFF) << 40

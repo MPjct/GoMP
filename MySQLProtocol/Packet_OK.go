@@ -1,7 +1,5 @@
 package MySQLProtocol
 
-import "fmt"
-
 type Packet_OK struct {
     Packet
     affected_rows uint64
@@ -60,14 +58,10 @@ func (packet Packet_OK) ToPacket(context Context) (data []byte) {
     return data
 }
 
-func (packet Packet_OK) FromPacket(context Context, data Proto) {
-    fmt.Println("data.offset", data.offset)
+func (packet *Packet_OK) FromPacket(context Context, data Proto) {
     data.GetFixedLengthInteger3()
-    fmt.Println("data.offset", data.offset)
     packet.sequence_id = data.GetFixedLengthInteger1()
-    fmt.Println("data.offset", data.offset)
     data.GetFixedLengthInteger1()
-    fmt.Println("data.offset", data.offset)
     packet.affected_rows = data.GetLengthEncodedInteger()
     packet.last_insert_id = data.GetLengthEncodedInteger()
     if Has_Flag(context.client_capability, CLIENT_PROTOCOL_41) {
