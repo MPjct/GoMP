@@ -24,3 +24,25 @@ func Benchmark_BuildLengthEncodedString(b *testing.B) {
 		BuildLengthEncodedString("ABC")
 	}
 }
+
+func Test_GetLengthEncodedStringSize(t *testing.T) {
+	var values = []struct {
+		in  string
+		out uint64
+	}{
+		{in: "", out: 1},
+		{in: "A", out: 2},
+		{in: "ABC", out: 4},
+		{in: "ABCABCABCABC", out: 13},
+	}
+
+	for _, value := range values {
+		assert.Equal(t, GetLengthEncodedStringSize(value.in), value.out, "")
+	}
+}
+
+func Benchmark_GetLengthEncodedStringSize(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		GetLengthEncodedStringSize("ABC")
+	}
+}
