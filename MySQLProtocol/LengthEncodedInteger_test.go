@@ -52,3 +52,27 @@ func Benchmark_GetLengthEncodedInteger(b *testing.B) {
 		proto.GetLengthEncodedInteger()
 	}
 }
+
+func Test_GetLengthEncodedIntegerSize(t *testing.T) {
+	var values = []struct {
+		in  uint64
+		out uint64
+	}{
+        {in: 0, out: 1},
+		{in: 250, out: 1},
+        {in: 0xFFFE, out: 3},
+        {in: 0xFFFFFE, out: 4},
+        {in: 0xFFFFFF, out: 9},
+	}
+
+	for _, value := range values {
+		assert.Equal(t, GetLengthEncodedIntegerSize(value.in), value.out, "")
+	}
+}
+
+func Benchmark_GetLengthEncodedIntegerSize(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		GetLengthEncodedIntegerSize(0)
+	}
+}
+

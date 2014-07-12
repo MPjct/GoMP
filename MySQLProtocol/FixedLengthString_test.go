@@ -50,6 +50,19 @@ func Test_GetFixedLengthString(t *testing.T) {
 		proto = Proto{data: value.in}
 		assert.Equal(t, proto.GetFixedLengthString(), value.out, "")
 	}
+    
+    values = []struct {
+		in  []byte
+		out string
+	}{
+		{in: []byte{0x41}, out: "A"},
+		{in: []byte{0x41, 0x42, 0x43}, out: "A"},
+	}
+
+	for _, value := range values {
+		proto = Proto{data: value.in}
+		assert.Equal(t, proto.GetFixedLengthString(1), value.out, "")
+	}
 }
 
 func Benchmark_GetFixedLengthString(b *testing.B) {

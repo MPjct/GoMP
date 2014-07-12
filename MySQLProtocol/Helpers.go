@@ -9,9 +9,5 @@ func Set_Flag(value uint64, flag uint64) (result uint64) {
 }
 
 func Remove_Flag(value uint64, flag uint64) (result uint64) {
-    return value&flag
-}
-
-func Toggle_Flag(value uint64, flag uint64) (result uint64) {
-    return value^flag
+    return value&^flag
 }
