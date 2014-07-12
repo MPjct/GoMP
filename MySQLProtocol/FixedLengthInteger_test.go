@@ -6,9 +6,9 @@ import "github.com/stretchr/testify/assert"
 func Test_BuildFixedLengthInteger1(t *testing.T) {
 	var values = []struct {
 		in  uint8
-		out [1]byte
+		out []byte
 	}{
-		{in: 0, out: [1]byte{0x00}},
+		{in: 0, out: []byte{0x00}},
 	}
 
 	for _, value := range values {
@@ -50,9 +50,9 @@ func Benchmark_GetFixedLengthInteger1(b *testing.B) {
 func Test_BuildFixedLengthInteger2(t *testing.T) {
 	var values = []struct {
 		in  uint16
-		out [2]byte
+		out []byte
 	}{
-		{in: 0, out: [2]byte{0x00, 0x00}},
+		{in: 0, out: []byte{0x00, 0x00}},
 	}
 
 	for _, value := range values {
@@ -94,9 +94,9 @@ func Benchmark_GetFixedLengthInteger2(b *testing.B) {
 func Test_BuildFixedLengthInteger3(t *testing.T) {
 	var values = []struct {
 		in  uint32
-		out [3]byte
+		out []byte
 	}{
-		{in: 0, out: [3]byte{0x00, 0x00, 0x00}},
+		{in: 0, out: []byte{0x00, 0x00, 0x00}},
 	}
 
 	for _, value := range values {
@@ -138,9 +138,9 @@ func Benchmark_GetFixedLengthInteger3(b *testing.B) {
 func Test_BuildFixedLengthInteger4(t *testing.T) {
 	var values = []struct {
 		in  uint32
-		out [4]byte
+		out []byte
 	}{
-		{in: 0, out: [4]byte{0x00, 0x00, 0x00, 0x00}},
+		{in: 0, out: []byte{0x00, 0x00, 0x00, 0x00}},
 	}
 
 	for _, value := range values {
@@ -182,9 +182,9 @@ func Benchmark_GetFixedLengthInteger4(b *testing.B) {
 func Test_BuildFixedLengthInteger6(t *testing.T) {
 	var values = []struct {
 		in  uint64
-		out [6]byte
+		out []byte
 	}{
-		{in: 0, out: [6]byte{0x00, 0x00, 0x00, 0x00, 0x00, 0x00}},
+		{in: 0, out: []byte{0x00, 0x00, 0x00, 0x00, 0x00, 0x00}},
 	}
 
 	for _, value := range values {
@@ -226,9 +226,9 @@ func Benchmark_GetFixedLengthInteger6(b *testing.B) {
 func Test_BuildFixedLengthInteger8(t *testing.T) {
 	var values = []struct {
 		in  uint64
-		out [8]byte
+		out []byte
 	}{
-		{in: 0, out: [8]byte{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}},
+		{in: 0, out: []byte{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}},
 	}
 
 	for _, value := range values {

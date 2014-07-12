@@ -7,3 +7,7 @@ func BuildLengthEncodedString(value string) (data []byte) {
 	copy(data[len(strlen):], []byte(value))
 	return data
 }
+
+func GetLengthEncodedStringSize(value string) uint64 {
+    return GetLengthEncodedIntegerSize(uint64(len(value))) + uint64(len(value))
+}
