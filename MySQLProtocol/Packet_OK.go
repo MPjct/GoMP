@@ -10,11 +10,8 @@ type Packet_OK struct {
     session_state_change string
 }
 
-func (packet Packet_OK) ToPacket(context Context) (data []byte) {
-    var size uint64
-    
-    // Figure out size
-    size = 1
+func (packet Packet_OK) GetPacketSize(context Context) (size uint64) {
+    size += 1
     size += GetLengthEncodedIntegerSize(packet.affected_rows)
     size += GetLengthEncodedIntegerSize(packet.last_insert_id)
     if Has_Flag(context.client_capability, CLIENT_PROTOCOL_41) {
@@ -31,8 +28,13 @@ func (packet Packet_OK) ToPacket(context Context) (data []byte) {
     } else {
         size += uint64(len(packet.info))
     }
+    return size
+}
+
+func (packet Packet_OK) ToPacket(context Context) (data []byte) {
+    size := packet.GetPacketSize(context)
     
-    data = make([]byte, 0, size+3)
+    data = make([]byte, 0, size+4)
     data = append(data, BuildFixedLengthInteger3(uint32(size))...)
     data = append(data, BuildFixedLengthInteger1(packet.sequence_id)...)
     data = append(data, 0x00)

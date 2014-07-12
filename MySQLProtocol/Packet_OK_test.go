@@ -20,7 +20,7 @@ func Test_Packet_OK(t *testing.T) {
 	}
 }
 
-func Benchmark_Packet_OK_From_Packet(b *testing.B) {
+func Benchmark_Packet_OK_FromPacket(b *testing.B) {
     context := Context{client_capability: CLIENT_PROTOCOL_41}
     var pkt Packet_OK
     var packet = Proto{data: []byte{0x07, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00}}
@@ -31,7 +31,17 @@ func Benchmark_Packet_OK_From_Packet(b *testing.B) {
 	}
 }
 
-func Benchmark_Packet_OK_To_Packet(b *testing.B) {
+func Benchmark_Packet_OK_GetPacketSize(b *testing.B) {
+    context := Context{client_capability: CLIENT_PROTOCOL_41}
+    pkt := Packet_OK{}
+    var packet = Proto{data: []byte{0x07, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00}}
+    pkt.FromPacket(context, packet)
+	for i := 0; i < b.N; i++ {
+		pkt.GetPacketSize(context)
+	}
+}
+
+func Benchmark_Packet_OK_ToPacket(b *testing.B) {
     context := Context{client_capability: CLIENT_PROTOCOL_41}
     pkt := Packet_OK{}
     var packet = Proto{data: []byte{0x07, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00}}
