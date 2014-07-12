@@ -49,6 +49,7 @@ func Benchmark_GetLengthEncodedInteger(b *testing.B) {
 	proto := Proto{data: []byte{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
+        proto.offset = 0
 		proto.GetLengthEncodedInteger()
 	}
 }

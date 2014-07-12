@@ -21,19 +21,20 @@ func Test_Packet_OK(t *testing.T) {
 }
 
 func Benchmark_Packet_OK_From_Packet(b *testing.B) {
-    context := Context{}
+    context := Context{client_capability: CLIENT_PROTOCOL_41}
     var pkt Packet_OK
-    var packet = Proto{data: []byte{0x00}}
+    var packet = Proto{data: []byte{0x07, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00}}
 	for i := 0; i < b.N; i++ {
         pkt = Packet_OK{}
+        packet.offset = 0
 		pkt.FromPacket(context, packet)
 	}
 }
 
 func Benchmark_Packet_OK_To_Packet(b *testing.B) {
+    context := Context{client_capability: CLIENT_PROTOCOL_41}
     pkt := Packet_OK{}
-    context := Context{}
-    var packet = Proto{data: []byte{0x00}}
+    var packet = Proto{data: []byte{0x07, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00}}
     pkt.FromPacket(context, packet)
 	for i := 0; i < b.N; i++ {
 		pkt.ToPacket(context)
