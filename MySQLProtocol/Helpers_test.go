@@ -5,12 +5,12 @@ import "github.com/stretchr/testify/assert"
 
 func Test_Has_Flag(t *testing.T) {
 	var values = []struct {
-		value uint64
-        flag uint64
-        result bool
+		value  uint64
+		flag   uint64
+		result bool
 	}{
-        {value: 0x0, flag: 0x1, result: false},
-        {value: 0x1, flag: 0x1, result: true},
+		{value: 0x0, flag: 0x1, result: false},
+		{value: 0x1, flag: 0x1, result: true},
 	}
 
 	for _, value := range values {
@@ -26,13 +26,13 @@ func Benchmark_Has_Flag(b *testing.B) {
 
 func Test_Set_Flag(t *testing.T) {
 	var values = []struct {
-		value uint64
-        flag uint64
-        result uint64
+		value  uint64
+		flag   uint64
+		result uint64
 	}{
-        {value: 0x0, flag: 0x1, result: 0x1},
-        {value: 0x1, flag: 0x1, result: 0x1},
-        {value: 0x1, flag: 0x0, result: 0x1},
+		{value: 0x0, flag: 0x1, result: 0x1},
+		{value: 0x1, flag: 0x1, result: 0x1},
+		{value: 0x1, flag: 0x0, result: 0x1},
 	}
 
 	for _, value := range values {
@@ -48,13 +48,13 @@ func Benchmark_Set_Flag(b *testing.B) {
 
 func Test_Remove_Flag(t *testing.T) {
 	var values = []struct {
-		value uint64
-        flag uint64
-        result uint64
+		value  uint64
+		flag   uint64
+		result uint64
 	}{
-        {value: 0x00, flag: 0x01, result: 0x00},
-        {value: 0x10, flag: 0x10, result: 0x00},
-        {value: 0x11, flag: 0x01, result: 0x10},
+		{value: 0x00, flag: 0x01, result: 0x00},
+		{value: 0x10, flag: 0x10, result: 0x00},
+		{value: 0x11, flag: 0x01, result: 0x10},
 	}
 
 	for _, value := range values {

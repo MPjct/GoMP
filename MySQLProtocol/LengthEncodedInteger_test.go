@@ -49,7 +49,7 @@ func Benchmark_GetLengthEncodedInteger(b *testing.B) {
 	proto := Proto{data: []byte{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-        proto.offset = 0
+		proto.offset = 0
 		proto.GetLengthEncodedInteger()
 	}
 }
@@ -59,11 +59,11 @@ func Test_GetLengthEncodedIntegerSize(t *testing.T) {
 		in  uint64
 		out uint64
 	}{
-        {in: 0, out: 1},
+		{in: 0, out: 1},
 		{in: 250, out: 1},
-        {in: 0xFFFE, out: 3},
-        {in: 0xFFFFFE, out: 4},
-        {in: 0xFFFFFF, out: 9},
+		{in: 0xFFFE, out: 3},
+		{in: 0xFFFFFE, out: 4},
+		{in: 0xFFFFFF, out: 9},
 	}
 
 	for _, value := range values {
@@ -76,4 +76,3 @@ func Benchmark_GetLengthEncodedIntegerSize(b *testing.B) {
 		GetLengthEncodedIntegerSize(0)
 	}
 }
-

@@ -54,16 +54,16 @@ func (proto *Proto) GetLengthEncodedInteger() (value uint64) {
 }
 
 func GetLengthEncodedIntegerSize(value uint64) (size uint64) {
-    if value < 251 {
+	if value < 251 {
 		return 1
 	}
 
 	if value < 0xFFFF {
-        return 3
+		return 3
 	}
 
 	if value < 0xFFFFFF {
-        return 4
+		return 4
 	}
-    return 9
+	return 9
 }

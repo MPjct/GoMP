@@ -50,8 +50,8 @@ func Test_GetFixedLengthString(t *testing.T) {
 		proto = Proto{data: value.in}
 		assert.Equal(t, proto.GetFixedLengthString(), value.out, "")
 	}
-    
-    values = []struct {
+
+	values = []struct {
 		in  []byte
 		out string
 	}{

@@ -1,6 +1,5 @@
 package MySQLProtocol
 
 type Context struct {
-    capability uint64
+	capability uint64
 }
-

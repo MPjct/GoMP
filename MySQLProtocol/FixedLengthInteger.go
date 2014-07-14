@@ -1,7 +1,7 @@
 package MySQLProtocol
 
 func BuildFixedLengthInteger1(value uint8) (data []byte) {
-    data = make([]byte, 1)
+	data = make([]byte, 1)
 	data[0] = byte(value >> 0 & 0xFF)
 	return data
 }
@@ -13,7 +13,7 @@ func (proto *Proto) GetFixedLengthInteger1() (value uint8) {
 }
 
 func BuildFixedLengthInteger2(value uint16) (data []byte) {
-    data = make([]byte, 2)
+	data = make([]byte, 2)
 	data[0] = byte(value >> 0 & 0xFF)
 	data[1] = byte(value >> 8 & 0xFF)
 	return data
@@ -27,7 +27,7 @@ func (proto *Proto) GetFixedLengthInteger2() (value uint16) {
 }
 
 func BuildFixedLengthInteger3(value uint32) (data []byte) {
-    data = make([]byte, 3)
+	data = make([]byte, 3)
 	data[0] = byte(value >> 0 & 0xFF)
 	data[1] = byte(value >> 8 & 0xFF)
 	data[2] = byte(value >> 16 & 0xFF)
@@ -43,7 +43,7 @@ func (proto *Proto) GetFixedLengthInteger3() (value uint32) {
 }
 
 func BuildFixedLengthInteger4(value uint32) (data []byte) {
-    data = make([]byte, 4)
+	data = make([]byte, 4)
 	data[0] = byte(value >> 0 & 0xFF)
 	data[1] = byte(value >> 8 & 0xFF)
 	data[2] = byte(value >> 16 & 0xFF)
@@ -61,7 +61,7 @@ func (proto *Proto) GetFixedLengthInteger4() (value uint32) {
 }
 
 func BuildFixedLengthInteger6(value uint64) (data []byte) {
-    data = make([]byte, 6)
+	data = make([]byte, 6)
 	data[0] = byte(value >> 0 & 0xFF)
 	data[1] = byte(value >> 8 & 0xFF)
 	data[2] = byte(value >> 16 & 0xFF)
@@ -83,7 +83,7 @@ func (proto *Proto) GetFixedLengthInteger6() (value uint64) {
 }
 
 func BuildFixedLengthInteger8(value uint64) (data []byte) {
-    data = make([]byte, 8)
+	data = make([]byte, 8)
 	data[0] = byte(value >> 0 & 0xFF)
 	data[1] = byte(value >> 8 & 0xFF)
 	data[2] = byte(value >> 16 & 0xFF)

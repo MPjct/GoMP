@@ -43,7 +43,7 @@ func Benchmark_GetFixedLengthInteger1(b *testing.B) {
 	proto := Proto{data: []byte{0x0}}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-        proto.offset = 0
+		proto.offset = 0
 		proto.GetFixedLengthInteger1()
 	}
 }
@@ -88,7 +88,7 @@ func Benchmark_GetFixedLengthInteger2(b *testing.B) {
 	proto := Proto{data: []byte{0x0, 0x0}}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-        proto.offset = 0
+		proto.offset = 0
 		proto.GetFixedLengthInteger2()
 	}
 }
@@ -133,7 +133,7 @@ func Benchmark_GetFixedLengthInteger3(b *testing.B) {
 	proto := Proto{data: []byte{0x0, 0x0, 0x0}}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-        proto.offset = 0
+		proto.offset = 0
 		proto.GetFixedLengthInteger3()
 	}
 }
@@ -178,7 +178,7 @@ func Benchmark_GetFixedLengthInteger4(b *testing.B) {
 	proto := Proto{data: []byte{0x0, 0x0, 0x0, 0x0}}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-        proto.offset = 0
+		proto.offset = 0
 		proto.GetFixedLengthInteger4()
 	}
 }
@@ -223,7 +223,7 @@ func Benchmark_GetFixedLengthInteger6(b *testing.B) {
 	proto := Proto{data: []byte{0x0, 0x0, 0x0, 0x0, 0x0, 0x0}}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-        proto.offset = 0
+		proto.offset = 0
 		proto.GetFixedLengthInteger6()
 	}
 }
@@ -268,7 +268,7 @@ func Benchmark_GetFixedLengthInteger8(b *testing.B) {
 	proto := Proto{data: []byte{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-        proto.offset = 0
+		proto.offset = 0
 		proto.GetFixedLengthInteger8()
 	}
 }
