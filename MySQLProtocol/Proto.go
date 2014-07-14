@@ -63,19 +63,19 @@ func PacketToString(data []byte) (value string) {
 }
 
 func StringToPacket(value string) (data []byte) {
-    lines := strings.Split(value, "\n")
-    data = make([]byte, 0, 16*len(lines))
-    
-    for _, line := range lines {
-        if len(line) < 51 {
-            continue
-        }
-        values := strings.Split(line[:51], " ")
-        for _, val := range values {
-            i, _ := hex.DecodeString(val)
-            data = append(data, i...)
-        }
-    }
-    
-    return data
+	lines := strings.Split(value, "\n")
+	data = make([]byte, 0, 16*len(lines))
+
+	for _, line := range lines {
+		if len(line) < 51 {
+			continue
+		}
+		values := strings.Split(line[:51], " ")
+		for _, val := range values {
+			i, _ := hex.DecodeString(val)
+			data = append(data, i...)
+		}
+	}
+
+	return data
 }
