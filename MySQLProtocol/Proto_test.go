@@ -84,7 +84,6 @@ f0 f1 f2 f3 f4 f5 f6 f7    f8 f9 fa fb fc fd fe ff    ................
 	}
 
 	for _, value := range values {
-		DumpPacket(value.data)
 		assert.Equal(t, StringToPacket(value.str), value.data, "")
 	}
 }
