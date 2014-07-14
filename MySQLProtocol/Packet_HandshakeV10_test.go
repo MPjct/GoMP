@@ -23,7 +23,6 @@ ff 08 02 00 0f c0 15 00    00 00 00 00 00 00 00 00    ................
 73 71 6c 5f 6e 61 74 69    76 65 5f 70 61 73 73 77    sql_native_passw
 6f 72 64 00                                           ord
 `)}, context: Context{}},
-
 	}
 	var pkt Packet_HandshakeV10
 

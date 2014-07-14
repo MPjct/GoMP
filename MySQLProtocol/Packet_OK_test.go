@@ -8,8 +8,9 @@ func Test_Packet_OK(t *testing.T) {
 		packet  Proto
 		context Context
 	}{
-		{packet: Proto{data: []byte{0x07, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00}},
-			context: Context{capability: CLIENT_PROTOCOL_41}},
+		{packet: Proto{data: StringToPacket(`
+07 00 00 02 00 00 00 02    00 00 00                   ...........
+`)}, context: Context{capability: CLIENT_PROTOCOL_41}},
 	}
 	var pkt Packet_OK
 
@@ -23,7 +24,9 @@ func Test_Packet_OK(t *testing.T) {
 func Benchmark_Packet_OK_FromPacket(b *testing.B) {
 	context := Context{capability: CLIENT_PROTOCOL_41}
 	var pkt Packet_OK
-	var packet = Proto{data: []byte{0x07, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00}}
+	var packet = Proto{data: StringToPacket(`
+07 00 00 02 00 00 00 02    00 00 00                   ...........
+`)}
 	for i := 0; i < b.N; i++ {
 		pkt = Packet_OK{}
 		packet.offset = 0
@@ -34,7 +37,9 @@ func Benchmark_Packet_OK_FromPacket(b *testing.B) {
 func Benchmark_Packet_OK_GetPacketSize(b *testing.B) {
 	context := Context{capability: CLIENT_PROTOCOL_41}
 	pkt := Packet_OK{}
-	var packet = Proto{data: []byte{0x07, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00}}
+	var packet = Proto{data: StringToPacket(`
+07 00 00 02 00 00 00 02    00 00 00                   ...........
+`)}
 	pkt.FromPacket(context, packet)
 	for i := 0; i < b.N; i++ {
 		pkt.GetPacketSize(context)
@@ -44,7 +49,9 @@ func Benchmark_Packet_OK_GetPacketSize(b *testing.B) {
 func Benchmark_Packet_OK_ToPacket(b *testing.B) {
 	context := Context{capability: CLIENT_PROTOCOL_41}
 	pkt := Packet_OK{}
-	var packet = Proto{data: []byte{0x07, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00}}
+	var packet = Proto{data: StringToPacket(`
+07 00 00 02 00 00 00 02    00 00 00                   ...........
+`)}
 	pkt.FromPacket(context, packet)
 	for i := 0; i < b.N; i++ {
 		pkt.ToPacket(context)

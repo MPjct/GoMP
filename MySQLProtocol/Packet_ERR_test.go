@@ -8,13 +8,10 @@ func Test_Packet_ERR(t *testing.T) {
 		packet  Proto
 		context Context
 	}{
-		{packet: Proto{data: []byte{
-			0x17, 0x00, 0x00, 0x01, 0xff, 0x48, 0x04, 0x23,
-			0x48, 0x59, 0x30, 0x30, 0x30, 0x4e, 0x6f, 0x20,
-			0x74, 0x61, 0x62, 0x6c, 0x65, 0x73, 0x20, 0x75,
-			0x73, 0x65, 0x64,
-		}},
-			context: Context{capability: CLIENT_PROTOCOL_41}},
+		{packet: Proto{data: StringToPacket(`
+17 00 00 01 ff 48 04 23    48 59 30 30 30 4e 6f 20    .....H.#HY000No
+74 61 62 6c 65 73 20 75    73 65 64                   tables used
+`)}, context: Context{capability: CLIENT_PROTOCOL_41}},
 	}
 	var pkt Packet_ERR
 
@@ -28,12 +25,10 @@ func Test_Packet_ERR(t *testing.T) {
 func Benchmark_Packet_ERR_FromPacket(b *testing.B) {
 	context := Context{capability: CLIENT_PROTOCOL_41}
 	var pkt Packet_ERR
-	var packet = Proto{data: []byte{
-		0x17, 0x00, 0x00, 0x01, 0xff, 0x48, 0x04, 0x23,
-		0x48, 0x59, 0x30, 0x30, 0x30, 0x4e, 0x6f, 0x20,
-		0x74, 0x61, 0x62, 0x6c, 0x65, 0x73, 0x20, 0x75,
-		0x73, 0x65, 0x64,
-	}}
+	var packet = Proto{data: StringToPacket(`
+17 00 00 01 ff 48 04 23    48 59 30 30 30 4e 6f 20    .....H.#HY000No
+74 61 62 6c 65 73 20 75    73 65 64                   tables used
+`)}
 	for i := 0; i < b.N; i++ {
 		pkt = Packet_ERR{}
 		packet.offset = 0
@@ -44,12 +39,10 @@ func Benchmark_Packet_ERR_FromPacket(b *testing.B) {
 func Benchmark_Packet_ERR_GetPacketSize(b *testing.B) {
 	context := Context{capability: CLIENT_PROTOCOL_41}
 	pkt := Packet_ERR{}
-	var packet = Proto{data: []byte{
-		0x17, 0x00, 0x00, 0x01, 0xff, 0x48, 0x04, 0x23,
-		0x48, 0x59, 0x30, 0x30, 0x30, 0x4e, 0x6f, 0x20,
-		0x74, 0x61, 0x62, 0x6c, 0x65, 0x73, 0x20, 0x75,
-		0x73, 0x65, 0x64,
-	}}
+	var packet = Proto{data: StringToPacket(`
+17 00 00 01 ff 48 04 23    48 59 30 30 30 4e 6f 20    .....H.#HY000No
+74 61 62 6c 65 73 20 75    73 65 64                   tables used
+`)}
 	pkt.FromPacket(context, packet)
 	for i := 0; i < b.N; i++ {
 		pkt.GetPacketSize(context)
@@ -59,12 +52,10 @@ func Benchmark_Packet_ERR_GetPacketSize(b *testing.B) {
 func Benchmark_Packet_ERR_ToPacket(b *testing.B) {
 	context := Context{capability: CLIENT_PROTOCOL_41}
 	pkt := Packet_ERR{}
-	var packet = Proto{data: []byte{
-		0x17, 0x00, 0x00, 0x01, 0xff, 0x48, 0x04, 0x23,
-		0x48, 0x59, 0x30, 0x30, 0x30, 0x4e, 0x6f, 0x20,
-		0x74, 0x61, 0x62, 0x6c, 0x65, 0x73, 0x20, 0x75,
-		0x73, 0x65, 0x64,
-	}}
+	var packet = Proto{data: StringToPacket(`
+17 00 00 01 ff 48 04 23    48 59 30 30 30 4e 6f 20    .....H.#HY000No
+74 61 62 6c 65 73 20 75    73 65 64                   tables used
+`)}
 	pkt.FromPacket(context, packet)
 	for i := 0; i < b.N; i++ {
 		pkt.ToPacket(context)
