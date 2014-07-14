@@ -12,7 +12,6 @@ func Test_Packet_HandshakeV9(t *testing.T) {
 17 00 00 00 09 35 2e 35    2e 32 2d 6d 32 00 0b 00    6....5.5.2-m2...
 00 00 64 76 48 40 49 2d    43 4a 00                   ..dvH@I-CJ.
 `)}, context: Context{}},
-
 	}
 	var pkt Packet_HandshakeV9
 

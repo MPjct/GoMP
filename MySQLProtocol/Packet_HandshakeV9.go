@@ -13,7 +13,7 @@ func (packet Packet_HandshakeV9) GetPacketSize(context Context) (size uint64) {
 	size += 1
 	size += GetNulTerminatedStringSize(packet.server_version)
 	size += 4
-    size += GetNulTerminatedStringSize(packet.auth_plugin_data)
+	size += GetNulTerminatedStringSize(packet.auth_plugin_data)
 
 	return size
 }
@@ -28,7 +28,7 @@ func (packet Packet_HandshakeV9) ToPacket(context Context) (data []byte) {
 	data = append(data, BuildFixedLengthInteger1(packet.protocol_version)...)
 	data = append(data, BuildNulTerminatedString(packet.server_version)...)
 	data = append(data, BuildFixedLengthInteger4(packet.connection_id)...)
-    data = append(data, BuildNulTerminatedString(packet.auth_plugin_data)...)
+	data = append(data, BuildNulTerminatedString(packet.auth_plugin_data)...)
 
 	return data
 }
