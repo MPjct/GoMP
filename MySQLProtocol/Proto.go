@@ -2,6 +2,8 @@ package MySQLProtocol
 
 import "fmt"
 import "math"
+import "strings"
+import "encoding/hex"
 
 type Proto struct {
 	data   []byte
@@ -13,10 +15,10 @@ func (proto *Proto) HasRemainingData() bool {
 }
 
 func DumpPacket(data []byte) {
-	fmt.Printf("%s", DumpPacketToString(data))
+	fmt.Printf("%s", PacketToString(data))
 }
 
-func DumpPacketToString(data []byte) (value string) {
+func PacketToString(data []byte) (value string) {
 	var i int
 	var start int
 	var end int
@@ -58,4 +60,22 @@ func DumpPacketToString(data []byte) (value string) {
 		value += fmt.Sprintf("%-27s%-27s%s\n", fstr, sstr, strval)
 	}
 	return value
+}
+
+func StringToPacket(value string) (data []byte) {
+    lines := strings.Split(value, "\n")
+    data = make([]byte, 0, 16*len(lines))
+    
+    for _, line := range lines {
+        if len(line) < 51 {
+            continue
+        }
+        values := strings.Split(line[:51], " ")
+        for _, val := range values {
+            i, _ := hex.DecodeString(val)
+            data = append(data, i...)
+        }
+    }
+    
+    return data
 }

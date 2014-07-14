@@ -19,18 +19,32 @@ func Benchmark_Proto_HasRemainingData(b *testing.B) {
 	}
 }
 
-func Test_Proto_DumpPacketToString(t *testing.T) {
+func Test_Proto_PacketToString(t *testing.T) {
 	data := []byte{0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
     0x09, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16,
     }
     str := "\n01 02 03 04 05 06 07 08    09 10 11 12 13 14 15 16    ................\n"
 
-	assert.Equal(t, DumpPacketToString(data), str, "")
+	assert.Equal(t, PacketToString(data), str, "")
 }
 
-func Benchmark_Proto_DumpPacketToString(b *testing.B) {
+func Benchmark_Proto_PacketToString(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		DumpPacketToString([]byte{0x0})
+		PacketToString([]byte{0x0})
 	}
 }
 
+func Test_Proto_StringToPacket(t *testing.T) {
+	data := []byte{0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
+    0x09, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16,
+    }
+    str := "\n01 02 03 04 05 06 07 08    09 10 11 12 13 14 15 16    ................\n"
+
+	assert.Equal(t, StringToPacket(str), data, "")
+}
+
+func Benchmark_StringToPacket(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		StringToPacket("\n01 02 03 04 05 06 07 08    09 10 11 12 13 14 15 16    ................\n")
+	}
+}
