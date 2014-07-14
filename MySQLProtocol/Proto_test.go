@@ -72,3 +72,21 @@ func Benchmark_StringToPacket(b *testing.B) {
 		StringToPacket("\n01 02 03 04 05 06 07 08    09 10 11 12 13 14 15 16    ................\n")
 	}
 }
+
+func Test_Proto_StringToPacketToString(t *testing.T) {
+
+    var values = []string {
+        "\n01 02 03 04 05 06 07 08    09 10 11 12 13 14 15 16    ................\n",
+        "\n05 00 00 05 fe 00 00 02    00                         .........\n",
+    }
+
+	for _, value := range values {
+		assert.Equal(t, PacketToString(StringToPacket(value)), value, "")
+	}
+}
+
+func Benchmark_StringToPacketToString(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		PacketToString(StringToPacket("\n01 02 03 04 05 06 07 08    09 10 11 12 13 14 15 16    ................\n"))
+	}
+}
