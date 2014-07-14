@@ -25,10 +25,11 @@ ff 08 02 00 0f c0 15 00    00 00 00 00 00 00 00 00    ................
 `)}, context: Context{}},
 	}
 	var pkt Packet_HandshakeV10
-
+    
 	for _, value := range values {
 		pkt = Packet_HandshakeV10{}
 		pkt.FromPacket(value.context, value.packet)
+        DumpPacket(value.packet.data)
 		assert.Equal(t, pkt.ToPacket(value.context), value.packet.data, "")
 	}
 }
