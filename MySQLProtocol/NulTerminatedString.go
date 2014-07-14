@@ -11,7 +11,11 @@ func (proto *Proto) GetNulTerminatedString() (value string) {
 	for proto.data[proto.offset+strlen] != 0x00 {
 		strlen++
 	}
-	value = string(proto.data[proto.offset : proto.offset+strlen])
+	value = string(proto.data[proto.offset:proto.offset+strlen])
 	proto.offset += strlen + 1
 	return value
+}
+
+func GetNulTerminatedStringSize(value string) uint64 {
+    return uint64(len(value)) + 1
 }

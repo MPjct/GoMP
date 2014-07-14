@@ -23,7 +23,7 @@ func (proto *Proto) GetFixedLengthString(size ...uint) (value string) {
 	} else {
 		datasize = size[0]
 	}
-	value = string(proto.data[proto.offset : proto.offset+datasize])
+	value = string(proto.data[proto.offset:proto.offset+datasize])
 	proto.offset += datasize
 	return value
 }
