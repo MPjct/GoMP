@@ -77,6 +77,10 @@ e0 e1 e2 e3 e4 e5 e6 e7    e8 e9 ea eb ec ed ee ef    ................
 f0 f1 f2 f3 f4 f5 f6 f7    f8 f9 fa fb fc fd fe ff    ................
 `,
 		},
+        {
+			data: []byte{0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16},
+			str:  "\n01 02 03 04 05 06 07 08  09 10 11 12 13 14 15 16   |................|\n",
+		},
 	}
 
 	for _, value := range values {
