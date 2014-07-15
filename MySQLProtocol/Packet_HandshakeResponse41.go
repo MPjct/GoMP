@@ -10,11 +10,10 @@ type Packet_HandshakeResponse41 struct {
     auth_response string
     database string
     auth_plugin_name string
-    attributes [][2]string
+    attributes Attributes
 }
 
 func (packet Packet_HandshakeResponse41) GetPacketSize(context Context) (size uint64) {
-    var totalattributesize uint64
     size += 4
     size += 4
     size += 1
@@ -38,14 +37,7 @@ func (packet Packet_HandshakeResponse41) GetPacketSize(context Context) (size ui
     }
     
     if Has_Flag(uint64(packet.capability), CLIENT_CONNECT_ATTRS) {
-        for _, attribute := range packet.attributes {
-            totalattributesize += GetLengthEncodedStringSize(attribute[0])
-            size += GetLengthEncodedStringSize(attribute[0])
-            
-            totalattributesize += GetLengthEncodedStringSize(attribute[1])
-            size += GetLengthEncodedStringSize(attribute[1])
-        }
-        size += GetLengthEncodedIntegerSize(totalattributesize)
+        size += packet.attributes.GetAttributesSize()
     }
 	return size
 }
@@ -81,17 +73,8 @@ func (packet Packet_HandshakeResponse41) ToPacket(context Context) (data []byte)
         data = append(data, BuildNulTerminatedString(packet.auth_plugin_name)...)
     }
     
-    var totalattributesize uint64
     if Has_Flag(uint64(packet.capability), CLIENT_CONNECT_ATTRS) {
-        for _, attribute := range packet.attributes {
-            totalattributesize += GetLengthEncodedStringSize(attribute[0])
-            totalattributesize += GetLengthEncodedStringSize(attribute[1])
-        }
-        data = append(data, BuildLengthEncodedInteger(totalattributesize)...)
-        for _, attribute := range packet.attributes {
-            data = append(data, BuildLengthEncodedString(attribute[0])...)
-            data = append(data, BuildLengthEncodedString(attribute[1])...)
-        }
+        data = append(data, packet.attributes.BuildAttributes()...)
     }
 
 	return data
@@ -123,13 +106,7 @@ func (packet *Packet_HandshakeResponse41) FromPacket(context Context, data Proto
         packet.auth_plugin_name = data.GetNulTerminatedString()
     }
     
-    packet.attributes = make([][2]string, 0)
     if Has_Flag(uint64(packet.capability), CLIENT_CONNECT_ATTRS) {
-        data.GetLengthEncodedInteger()
-        for data.HasRemainingData() {
-            key := data.GetLengthEncodedString()
-            val := data.GetLengthEncodedString()
-            packet.attributes = append(packet.attributes, [2]string{key, val})
-        }
+        packet.attributes = data.GetAttributes()
     }
 }
