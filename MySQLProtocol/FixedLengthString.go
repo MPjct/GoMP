@@ -27,3 +27,11 @@ func (proto *Proto) GetFixedLengthString(size ...uint) (value string) {
 	proto.offset += datasize
 	return value
 }
+
+func GetFixedLengthStringSize(value string, size ...uint) (uint64) {
+    if len(size) == 0 {
+		return uint64(len(value))
+	} else {
+        return uint64(size[0])
+	}
+}
