@@ -10,7 +10,7 @@ type Packet_HandshakeResponse41 struct {
     auth_response string
     database string
     auth_plugin_name string
-    attributes map[string]string
+    attributes [][2]string
 }
 
 func (packet Packet_HandshakeResponse41) GetPacketSize(context Context) (size uint64) {
@@ -38,12 +38,12 @@ func (packet Packet_HandshakeResponse41) GetPacketSize(context Context) (size ui
     }
     
     if Has_Flag(uint64(packet.capability), CLIENT_CONNECT_ATTRS) {
-        for key, attr := range packet.attributes {
-            totalattributesize += GetLengthEncodedStringSize(attr)
-            size += GetLengthEncodedStringSize(attr)
+        for _, attribute := range packet.attributes {
+            totalattributesize += GetLengthEncodedStringSize(attribute[0])
+            size += GetLengthEncodedStringSize(attribute[0])
             
-            totalattributesize += GetLengthEncodedStringSize(key)
-            size += GetLengthEncodedStringSize(key)
+            totalattributesize += GetLengthEncodedStringSize(attribute[1])
+            size += GetLengthEncodedStringSize(attribute[1])
         }
         size += GetLengthEncodedIntegerSize(totalattributesize)
     }
@@ -83,14 +83,14 @@ func (packet Packet_HandshakeResponse41) ToPacket(context Context) (data []byte)
     
     var totalattributesize uint64
     if Has_Flag(uint64(packet.capability), CLIENT_CONNECT_ATTRS) {
-        for key, attr := range packet.attributes {
-            totalattributesize += GetLengthEncodedStringSize(key)
-            totalattributesize += GetLengthEncodedStringSize(attr)
+        for _, attribute := range packet.attributes {
+            totalattributesize += GetLengthEncodedStringSize(attribute[0])
+            totalattributesize += GetLengthEncodedStringSize(attribute[1])
         }
         data = append(data, BuildLengthEncodedInteger(totalattributesize)...)
-        for key, attr := range packet.attributes {
-            data = append(data, BuildLengthEncodedString(key)...)
-            data = append(data, BuildLengthEncodedString(attr)...)
+        for _, attribute := range packet.attributes {
+            data = append(data, BuildLengthEncodedString(attribute[0])...)
+            data = append(data, BuildLengthEncodedString(attribute[1])...)
         }
     }
 
@@ -123,13 +123,13 @@ func (packet *Packet_HandshakeResponse41) FromPacket(context Context, data Proto
         packet.auth_plugin_name = data.GetNulTerminatedString()
     }
     
-    packet.attributes = make(map[string]string, 0)
+    packet.attributes = make([][2]string, 0)
     if Has_Flag(uint64(packet.capability), CLIENT_CONNECT_ATTRS) {
         data.GetLengthEncodedInteger()
         for data.HasRemainingData() {
             key := data.GetLengthEncodedString()
             val := data.GetLengthEncodedString()
-            packet.attributes[key] = val
+            packet.attributes = append(packet.attributes, [2]string{key, val})
         }
     }
 }
