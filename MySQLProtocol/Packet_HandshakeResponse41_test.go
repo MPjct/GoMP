@@ -36,7 +36,6 @@ e8 82 e5 b3 f4 1a 97 75    6b c8 be db 9f 80 6d 79    .......uk.....my
 00 00 00 00 72 6f 6f 74    00 14 14 63 6b 70 99 8a    ....root...ckp..
 b6 9e 96 87 a2 30 9a 40    67 2b 83 38 85 4b          .....0.@g+.8.K
 `)}, context: Context{}},
-
 	}
 	var pkt Packet_HandshakeResponse41
 
