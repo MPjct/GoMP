@@ -36,8 +36,6 @@ e8 82 e5 b3 f4 1a 97 75    6b c8 be db 9f 80 6d 79    .......uk.....my
 	for _, value := range values {
 		pkt = Packet_HandshakeResponse41{}
 		pkt.FromPacket(value.context, value.packet)
-        DumpPacket(value.packet.data)
-        DumpPacket(pkt.ToPacket(value.context))
 		assert.Equal(t, pkt.ToPacket(value.context), value.packet.data, "")
 	}
 }

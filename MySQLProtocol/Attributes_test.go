@@ -22,8 +22,6 @@ func Test_Attributes(t *testing.T) {
 	for _, value := range values {
     
         pkt = value.packet.GetAttributes()
-        DumpPacket(value.packet.data)
-        DumpPacket(pkt.BuildAttributes())
 		assert.Equal(t, pkt.BuildAttributes(), value.packet.data, "")
 	}
 }
