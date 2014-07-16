@@ -2,8 +2,6 @@ package MySQLProtocol
 
 type Packet_OldAuthSwitchRequest struct {
 	Packet
-
-	protocol_version byte
 }
 
 func (packet Packet_OldAuthSwitchRequest) GetPacketSize(context Context) (size uint64) {
