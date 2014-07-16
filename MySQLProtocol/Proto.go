@@ -13,6 +13,12 @@ func (proto *Proto) HasRemainingData() bool {
 	return uint(len(proto.data))-proto.offset > 0
 }
 
+func (proto *Proto) ExtractSlice(size uint) (data []byte) {
+	data = proto.data[proto.offset : proto.offset+size]
+	proto.offset += size
+	return data
+}
+
 func DumpPacket(data []byte) {
 	fmt.Printf("\n%s\n", hex.Dump(data))
 }

@@ -62,9 +62,9 @@ func (packet Packet_HandshakeV10) ToPacket(context Context) (data []byte) {
 	data = append(data, BuildFixedLengthInteger1(packet.character_set)...)
 	data = append(data, BuildFixedLengthInteger2(packet.status)...)
 	data = append(data, BuildFixedLengthInteger2(uint16(packet.capability&0xFFFF))...)
-    if len(packet.auth_plugin_data) > 255 {
-        panic("packet.auth_response has to be less then 255 with this version of mysql. See https://dev.mysql.com/doc/internals/en/limitations.html")
-    } else if len(packet.auth_plugin_data) > 8 {
+	if len(packet.auth_plugin_data) > 255 {
+		panic("packet.auth_response has to be less then 255 with this version of mysql. See https://dev.mysql.com/doc/internals/en/limitations.html")
+	} else if len(packet.auth_plugin_data) > 8 {
 		data = append(data, BuildFixedLengthInteger1(uint8(len(packet.auth_plugin_data)))...)
 	} else {
 		data = append(data, 0x00)

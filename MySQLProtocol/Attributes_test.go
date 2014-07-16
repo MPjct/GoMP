@@ -5,7 +5,7 @@ import "github.com/stretchr/testify/assert"
 
 func Test_Attributes(t *testing.T) {
 	var values = []struct {
-		packet  Proto
+		packet Proto
 	}{
 		{packet: Proto{data: StringToPacket(`
             61 03 5f 6f    73 09 64 65 62 69 61 6e    ord.a._os.debian
@@ -20,8 +20,8 @@ func Test_Attributes(t *testing.T) {
 	var pkt Attributes
 
 	for _, value := range values {
-    
-        pkt = value.packet.GetAttributes()
+
+		pkt = value.packet.GetAttributes()
 		assert.Equal(t, pkt.BuildAttributes(), value.packet.data, "")
 	}
 }

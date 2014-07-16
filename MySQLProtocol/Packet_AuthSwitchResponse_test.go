@@ -15,7 +15,6 @@ func Test_Packet_AuthSwitchResponse(t *testing.T) {
 14 00 00 03 f4 17 96 1f    79 f3 ac 10 0b da a6 b3    ........y.......
 b5 c2 0e ab 59 85 ff b8                               ....Y...
 `)}, context: Context{}},
-
 	}
 	var pkt Packet_AuthSwitchResponse
 

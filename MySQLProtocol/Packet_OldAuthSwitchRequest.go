@@ -14,9 +14,9 @@ func (packet Packet_OldAuthSwitchRequest) ToPacket(context Context) (data []byte
 	size := packet.GetPacketSize(context)
 
 	data = make([]byte, 0, size+4)
-    data = append(data, BuildFixedLengthInteger3(uint32(size))...)
+	data = append(data, BuildFixedLengthInteger3(uint32(size))...)
 	data = append(data, BuildFixedLengthInteger1(packet.sequence_id)...)
-    data = append(data, 0xFE)
+	data = append(data, 0xFE)
 
 	return data
 }
