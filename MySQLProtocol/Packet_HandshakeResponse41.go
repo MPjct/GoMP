@@ -59,6 +59,9 @@ func (packet Packet_HandshakeResponse41) ToPacket(context Context) (data []byte)
     if Has_Flag(uint64(packet.capability), CLIENT_PLUGIN_AUTH_LENENC_CLIENT_DATA) {
         data = append(data, BuildLengthEncodedString(packet.auth_response)...)
     } else if Has_Flag(uint64(packet.capability), CLIENT_SECURE_CONNECTION) {
+        if len(packet.auth_response) > 255 {
+            panic("packet.auth_response has to be less then 255 with this version of mysql. See https://dev.mysql.com/doc/internals/en/limitations.html")
+        }
         data = append(data, BuildFixedLengthInteger1(uint8(len(packet.auth_response)))...)
         data = append(data, BuildFixedLengthString(packet.auth_response, uint(len(packet.auth_response)))...)
     } else {
