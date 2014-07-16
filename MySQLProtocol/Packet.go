@@ -58,10 +58,10 @@ func DecompressPacket(input Proto) (output Proto) {
 	return output
 }
 
-func EncryptPacket(packets ...Packet) (data []byte) {
-	return data
+func EncryptPacket(sequence_id uint8, input []byte) (output []byte) {
+	return output
 }
 
-func DecryptPacket(data Proto) (packets []Packet) {
-	return packets
+func DecryptPacket(input Proto) (output Proto) {
+	return output
 }

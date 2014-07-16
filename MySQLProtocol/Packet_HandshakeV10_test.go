@@ -23,6 +23,13 @@ ff 08 02 00 0f c0 15 00    00 00 00 00 00 00 00 00    ................
 73 71 6c 5f 6e 61 74 69    76 65 5f 70 61 73 73 77    sql_native_passw
 6f 72 64 00                                           ord
 `)}, context: Context{}},
+
+		{packet: Proto{data: StringToPacket(`
+36 00 00 00 0a 35 2e 35    2e 32 2d 6d 32 00 52 00    6....5.5.2-m2.R.
+00 00 22 3d 4e 50 29 75    39 56 00 ff ff 08 02 00    .."=NP)u9V......
+00 00 00 00 00 00 00 00    00 00 00 00 00 29 64 40    .............)d@
+52 5c 55 78 7a 7c 21 29    4b 00                      R\Uxz|!)K.
+`)}, context: Context{}},
 	}
 	var pkt Packet_HandshakeV10
 
