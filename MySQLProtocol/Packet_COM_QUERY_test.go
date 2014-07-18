@@ -4,10 +4,10 @@ import "testing"
 import "github.com/stretchr/testify/assert"
 
 var COM_QUERY_test_packets = []struct {
-		packet  Proto
-		context Context
-	}{
-		{packet: Proto{data: StringToPacket(`
+	packet  Proto
+	context Context
+}{
+	{packet: Proto{data: StringToPacket(`
 21 00 00 00 03 73 65 6c    65 63 74 20 40 40 76 65    !....select @@ve
 72 73 69 6f 6e 5f 63 6f    6d 6d 65 6e 74 20 6c 69    rsion_comment li
 6d 69 74 20 31                                        mit 1

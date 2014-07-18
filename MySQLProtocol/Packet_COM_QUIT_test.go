@@ -4,10 +4,10 @@ import "testing"
 import "github.com/stretchr/testify/assert"
 
 var COM_QUIT_test_packets = []struct {
-		packet  Proto
-		context Context
-	}{
-		{packet: Proto{data: StringToPacket(`
+	packet  Proto
+	context Context
+}{
+	{packet: Proto{data: StringToPacket(`
 01 00 00 00 01
 `)}, context: Context{}},
 }

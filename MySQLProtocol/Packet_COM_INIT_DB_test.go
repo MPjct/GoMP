@@ -4,10 +4,10 @@ import "testing"
 import "github.com/stretchr/testify/assert"
 
 var COM_INIT_DB_test_packets = []struct {
-		packet  Proto
-		context Context
-	}{
-		{packet: Proto{data: StringToPacket(`
+	packet  Proto
+	context Context
+}{
+	{packet: Proto{data: StringToPacket(`
 05 00 00 00 02 74 65 73    74                         .....test
 `)}, context: Context{}},
 }
