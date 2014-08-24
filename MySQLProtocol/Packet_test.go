@@ -35,6 +35,26 @@ var Test_CompressPacket_values = []struct {
 6d 65 6e 74 20 6c 69 6d    69 74 20 31                ment limit 1
 `),
 	},
+	{
+		sequence_id: 1,
+		input: StringToPacket(`
+01 00 00 01 01 25 00 00    02 03 64 65 66 00 00 00    .....%....def...
+0f 72 65 70 65 61 74 28    22 61 22 2c 20 35 30 29    .repeat("a", 50)
+00 0c 08 00 32 00 00 00    fd 01 00 1f 00 00 05 00    ....2...........
+00 03 fe 00 00 02 00 33    00 00 04 32 61 61 61 61    .......3...2aaaa
+61 61 61 61 61 61 61 61    61 61 61 61 61 61 61 61    aaaaaaaaaaaaaaaa
+61 61 61 61 61 61 61 61    61 61 61 61 61 61 61 61    aaaaaaaaaaaaaaaa
+61 61 61 61 61 61 61 61    61 61 61 61 61 61 05 00    aaaaaaaaaaaaaa..
+00 05 fe 00 00 02 00                                  .......
+`),
+		output: StringToPacket(`
+48 00 00 01 77 00 00 62    64 60 60 64 54 65 60 60    |H...w..bd..dTe..|
+62 4e 49 4d 63 60 60 e0    2f 4a 2d 48 4d 2c d1 50    |bNIMc.../J-HM,.P|
+4a 54 d2 51 30 35 d0 64    e0 e1 60 30 02 8a ff 65    |JT.Q05.d...0...e|
+64 90 67 60 60 65 60 60    fe 07 54 cc 60 cc c0 c0    |d.g..e....T.....|
+62 94 48 32 00 ea 67 05    eb 07 04 00 00 ff ff       |b.H2..g........|
+`),
+	},
 }
 
 func Test_CompressPacket(t *testing.T) {
