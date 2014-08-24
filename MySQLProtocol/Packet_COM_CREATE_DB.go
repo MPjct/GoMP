@@ -2,12 +2,12 @@ package MySQLProtocol
 
 type Packet_COM_CREATE_DB struct {
 	Packet
-    schema string
+	schema string
 }
 
 func (packet Packet_COM_CREATE_DB) GetPacketSize(context Context) (size uint64) {
 	size += 1
-    size += GetFixedLengthStringSize(packet.schema)
+	size += GetFixedLengthStringSize(packet.schema)
 	return size
 }
 
@@ -18,8 +18,8 @@ func (packet Packet_COM_CREATE_DB) ToPacket(context Context) (data []byte) {
 	data = append(data, BuildFixedLengthInteger3(uint32(size))...)
 	data = append(data, BuildFixedLengthInteger1(packet.sequence_id)...)
 	data = append(data, COM_CREATE_DB)
-    data = append(data, BuildFixedLengthString(packet.schema)...)
-    
+	data = append(data, BuildFixedLengthString(packet.schema)...)
+
 	return data
 }
 
@@ -27,5 +27,5 @@ func (packet *Packet_COM_CREATE_DB) FromPacket(context Context, data Proto) {
 	data.GetFixedLengthInteger3()
 	packet.sequence_id = data.GetFixedLengthInteger1()
 	data.GetFixedLengthInteger1()
-    packet.schema = data.GetFixedLengthString()
+	packet.schema = data.GetFixedLengthString()
 }

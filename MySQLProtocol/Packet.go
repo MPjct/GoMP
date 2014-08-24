@@ -1,8 +1,8 @@
 package MySQLProtocol
 
-import "compress/zlib"
-import "io/ioutil"
+import "compress/flate"
 import "bytes"
+import "fmt"
 
 type Packet struct {
 	sequence_id uint8
@@ -20,14 +20,14 @@ func CompressPacket(sequence_id uint8, input []byte) (output []byte) {
 		compressed_payload = input
 	} else {
 		var b bytes.Buffer
-		w := zlib.NewWriter(&b)
+		w, _ := flate.NewWriter(&b, 9)
 		w.Write(input)
 		w.Close()
 		compressed_payload = b.Bytes()
 		compressed_payload_length = uint32(len(compressed_payload))
 	}
 
-	output = make([]byte, compressed_payload_length+7)
+	output = make([]byte, 0, compressed_payload_length+7)
 	output = append(output, BuildFixedLengthInteger3(compressed_payload_length)...)
 	output = append(output, BuildFixedLengthInteger1(sequence_id)...)
 	output = append(output, BuildFixedLengthInteger3(uncompressed_payload_length)...)
@@ -43,14 +43,18 @@ func DecompressPacket(input Proto) (output Proto) {
 	if uncompressed_payload_length == 0 {
 		output.data = input.ExtractSlice(uint(compressed_payload_length))
 	} else {
-		b := bytes.NewReader(input.ExtractSlice(uint(compressed_payload_length)))
-		r, err := zlib.NewReader(b)
-		if err == nil {
-			panic("Decompression failed!")
+		compressedData := input.ExtractSlice(uint(compressed_payload_length))
+		b := bytes.NewReader(compressedData)
+		r := flate.NewReader(b)
+		data := make([]byte, uncompressed_payload_length)
+		n, err := r.Read(data)
+		if err != nil {
+			panic(err.Error())
 		}
-		data, err := ioutil.ReadAll(r)
-		if err == nil {
-			panic("Decompression failed!")
+		if uint32(n) != uncompressed_payload_length {
+			DumpPacket(data)
+			fmt.Printf("Decompression was too short: %d, expected:%d\n", n, uncompressed_payload_length)
+			panic("Decompression was too short!")
 		}
 		output.data = data
 		r.Close()

@@ -85,12 +85,12 @@ func Test_GetFixedLengthStringSize(t *testing.T) {
 
 	for _, value := range values {
 		assert.Equal(t, GetFixedLengthStringSize(value.in), value.out, "")
-        assert.Equal(t, GetFixedLengthStringSize(value.in, 1), 1, "")
+		assert.Equal(t, GetFixedLengthStringSize(value.in, 1), 1, "")
 	}
 }
 
 func Benchmark_GetFixedLengthStringSize(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-        GetFixedLengthStringSize("123")
+		GetFixedLengthStringSize("123")
 	}
 }
