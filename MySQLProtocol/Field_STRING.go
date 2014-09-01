@@ -13,7 +13,7 @@ func (field *Field_STRING) Get(proto *Proto) {
 }
 
 func (field Field_STRING) GetType() byte {
-	return 0xfd
+	return MYSQL_TYPE_STRING
 }
 
 func (field Field_STRING) Size() uint64 {
