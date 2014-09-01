@@ -3,11 +3,10 @@ package MySQLProtocol
 import "testing"
 import "github.com/stretchr/testify/assert"
 
-func Test_Attributes(t *testing.T) {
-	var values = []struct {
-		packet Proto
-	}{
-		{packet: Proto{data: StringToPacket(`
+var Attributes_test_packets = []struct {
+        packet Proto
+    }{
+    {packet: Proto{data: StringToPacket(`
             61 03 5f 6f    73 09 64 65 62 69 61 6e    ord.a._os.debian
 36 2e 30 0c 5f 63 6c 69    65 6e 74 5f 6e 61 6d 65    6.0._client_name
 08 6c 69 62 6d 79 73 71    6c 04 5f 70 69 64 05 32    .libmysql._pid.2
@@ -17,9 +16,11 @@ func Test_Attributes(t *testing.T) {
 6f 6f 03 62 61 72                                     oo.bar
 `)}},
 	}
+
+func Test_Attributes(t *testing.T) {
 	var pkt Attributes
 
-	for _, value := range values {
+	for _, value := range Attributes_test_packets {
 
 		pkt = value.packet.GetAttributes()
 		assert.Equal(t, pkt.BuildAttributes(), value.packet.data, "")
