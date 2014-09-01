@@ -5,15 +5,15 @@ type Field_STRING struct {
 }
 
 func (field Field_STRING) Build() []byte {
-    return BuildLengthEncodedString(field.data)
+	return BuildLengthEncodedString(field.data)
 }
 
-func (field *Field_STRING) Get(proto *Proto){
-    field.data = proto.GetLengthEncodedString()
+func (field *Field_STRING) Get(proto *Proto) {
+	field.data = proto.GetLengthEncodedString()
 }
 
 func (field Field_STRING) GetType() byte {
-    return 0xfd
+	return 0xfd
 }
 
 func (field Field_STRING) Size() uint64 {

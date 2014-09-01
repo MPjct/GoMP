@@ -17,7 +17,7 @@ func (packet Packet_COM_REFRESH) ToPacket(context Context) (data []byte) {
 	data = append(data, BuildFixedLengthInteger3(uint32(size))...)
 	data = append(data, BuildFixedLengthInteger1(packet.sequence_id)...)
 	data = append(data, COM_REFRESH)
-    data = append(data, packet.sub_command)
+	data = append(data, packet.sub_command)
 	return data
 }
 
@@ -25,5 +25,5 @@ func (packet *Packet_COM_REFRESH) FromPacket(context Context, data Proto) {
 	data.GetFixedLengthInteger3()
 	packet.sequence_id = data.GetFixedLengthInteger1()
 	data.GetFixedLengthInteger1()
-    packet.sub_command = data.GetFixedLengthInteger1()
+	packet.sub_command = data.GetFixedLengthInteger1()
 }

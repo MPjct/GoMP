@@ -5,9 +5,9 @@ import "bytes"
 import "fmt"
 
 type Packet_interface interface {
-    GetPacketSize(Context) uint64
-    ToPacket(Context) []byte
-    FromPacket(Context, Proto)
+	GetPacketSize(Context) uint64
+	ToPacket(Context) []byte
+	FromPacket(Context, Proto)
 }
 
 type Packet struct {

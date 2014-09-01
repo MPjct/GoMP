@@ -17,7 +17,7 @@ func (packet Packet_COM_SHUTDOWN) ToPacket(context Context) (data []byte) {
 	data = append(data, BuildFixedLengthInteger3(uint32(size))...)
 	data = append(data, BuildFixedLengthInteger1(packet.sequence_id)...)
 	data = append(data, COM_SHUTDOWN)
-    data = append(data, packet.shutdown_type)
+	data = append(data, packet.shutdown_type)
 	return data
 }
 
@@ -25,9 +25,9 @@ func (packet *Packet_COM_SHUTDOWN) FromPacket(context Context, data Proto) {
 	data.GetFixedLengthInteger3()
 	packet.sequence_id = data.GetFixedLengthInteger1()
 	data.GetFixedLengthInteger1()
-    if data.HasRemainingData() {
-        packet.shutdown_type = data.GetFixedLengthInteger1()
-    } else {
-        packet.shutdown_type = 0x00
-    }
+	if data.HasRemainingData() {
+		packet.shutdown_type = data.GetFixedLengthInteger1()
+	} else {
+		packet.shutdown_type = 0x00
+	}
 }
