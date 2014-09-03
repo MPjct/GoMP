@@ -7,7 +7,7 @@ type Field_interface interface {
 	Size() uint64
 }
 
-func GetField(field_type byte, proto *Proto) (field Field_interface) {
+func (proto *Proto) GetField(field_type byte) (field Field_interface) {
 	switch field_type {
 	case MYSQL_TYPE_DECIMAL:
         field := new(Field_DECIMAL)
