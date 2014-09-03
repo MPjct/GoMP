@@ -3,11 +3,11 @@ package MySQLProtocol
 type Packet_COM_STMT_RESET struct {
 	Packet
 
-	statement_id  uint32
+	statement_id uint32
 }
 
 func (packet Packet_COM_STMT_RESET) GetPacketSize(context Context) (size uint64) {
-    size += 1
+	size += 1
 	size += 4
 	return size
 }

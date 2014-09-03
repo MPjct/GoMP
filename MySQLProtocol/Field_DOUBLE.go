@@ -7,11 +7,11 @@ type Field_DOUBLE struct {
 }
 
 func (field Field_DOUBLE) Build() []byte {
-    return BuildFixedLengthInteger8(math.Float64bits(field.data))
+	return BuildFixedLengthInteger8(math.Float64bits(field.data))
 }
 
 func (field *Field_DOUBLE) Get(proto *Proto) {
-    field.data = math.Float64frombits(proto.GetFixedLengthInteger8())
+	field.data = math.Float64frombits(proto.GetFixedLengthInteger8())
 }
 
 func (field Field_DOUBLE) GetType() byte {

@@ -7,7 +7,7 @@ type Packet_COM_SET_OPTION struct {
 }
 
 func (packet Packet_COM_SET_OPTION) GetPacketSize(context Context) (size uint64) {
-    size += 1
+	size += 1
 	size += 2
 	return size
 }

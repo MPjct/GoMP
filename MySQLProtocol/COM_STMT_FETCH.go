@@ -4,13 +4,13 @@ type Packet_COM_STMT_FETCH struct {
 	Packet
 
 	statement_id uint32
-    num_rows uint32
+	num_rows     uint32
 }
 
 func (packet Packet_COM_STMT_FETCH) GetPacketSize(context Context) (size uint64) {
-    size += 1
+	size += 1
 	size += 4
-    size += 4
+	size += 4
 	return size
 }
 
@@ -23,7 +23,7 @@ func (packet Packet_COM_STMT_FETCH) ToPacket(context Context) (data []byte) {
 
 	data = append(data, COM_STMT_FETCH)
 	data = append(data, BuildFixedLengthInteger4(packet.statement_id)...)
-    data = append(data, BuildFixedLengthInteger4(packet.num_rows)...)
+	data = append(data, BuildFixedLengthInteger4(packet.num_rows)...)
 
 	return data
 }
@@ -33,5 +33,5 @@ func (packet *Packet_COM_STMT_FETCH) FromPacket(context Context, data Proto) {
 	packet.sequence_id = data.GetFixedLengthInteger1()
 	data.GetFixedLengthInteger1()
 	packet.statement_id = data.GetFixedLengthInteger4()
-    packet.num_rows = data.GetFixedLengthInteger4()
+	packet.num_rows = data.GetFixedLengthInteger4()
 }
