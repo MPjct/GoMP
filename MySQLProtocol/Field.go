@@ -129,7 +129,6 @@ func (proto *Proto) GetField(field_type byte) (field Field_interface) {
 		field := new(Field_GEOMETRY)
 		field.Get(proto)
 		return field
-	default:
-		return nil
 	}
+    return nil
 }
