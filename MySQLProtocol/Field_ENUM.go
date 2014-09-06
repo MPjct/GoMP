@@ -16,6 +16,6 @@ func (field Field_ENUM) GetType() byte {
 	return MYSQL_TYPE_ENUM
 }
 
-func (field Field_ENUM) Size() uint64 {
+func (field Field_ENUM) PacketSize() uint64 {
 	return GetLengthEncodedStringSize(field.data)
 }

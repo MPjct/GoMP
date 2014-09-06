@@ -18,6 +18,6 @@ func (field Field_FLOAT) GetType() byte {
 	return MYSQL_TYPE_FLOAT
 }
 
-func (field Field_FLOAT) Size() uint64 {
+func (field Field_FLOAT) PacketSize() uint64 {
 	return 4
 }

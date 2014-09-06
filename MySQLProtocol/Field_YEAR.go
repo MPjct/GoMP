@@ -16,6 +16,6 @@ func (field Field_YEAR) GetType() byte {
 	return MYSQL_TYPE_YEAR
 }
 
-func (field Field_YEAR) Size() uint64 {
+func (field Field_YEAR) PacketSize() uint64 {
 	return 2
 }

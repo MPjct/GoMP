@@ -74,3 +74,7 @@ func (field Field_TIMESTAMP2) Size() uint64 {
 
 	return 0
 }
+
+func (field Field_TIMESTAMP2) PacketSize() uint64 {
+    return field.Size()+1
+}

@@ -16,6 +16,6 @@ func (field Field_NEWDECIMAL) GetType() byte {
 	return MYSQL_TYPE_NEWDECIMAL
 }
 
-func (field Field_NEWDECIMAL) Size() uint64 {
+func (field Field_NEWDECIMAL) PacketSize() uint64 {
 	return GetLengthEncodedStringSize(field.data)
 }

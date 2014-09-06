@@ -4,7 +4,7 @@ type Field_interface interface {
 	Build() []byte
 	Get(proto *Proto)
 	GetType() byte
-	Size() uint64
+	PacketSize() uint64
 }
 
 func (proto *Proto) GetField(field_type byte) (field Field_interface) {

@@ -18,6 +18,6 @@ func (field Field_DOUBLE) GetType() byte {
 	return MYSQL_TYPE_DOUBLE
 }
 
-func (field Field_DOUBLE) Size() uint64 {
+func (field Field_DOUBLE) PacketSize() uint64 {
 	return 8
 }

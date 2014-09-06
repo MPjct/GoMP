@@ -16,6 +16,6 @@ func (field Field_MEDIUM_BLOB) GetType() byte {
 	return MYSQL_TYPE_MEDIUM_BLOB
 }
 
-func (field Field_MEDIUM_BLOB) Size() uint64 {
+func (field Field_MEDIUM_BLOB) PacketSize() uint64 {
 	return GetLengthEncodedStringSize(field.data)
 }

@@ -16,6 +16,6 @@ func (field Field_LONGLONG) GetType() byte {
 	return MYSQL_TYPE_LONGLONG
 }
 
-func (field Field_LONGLONG) Size() uint64 {
+func (field Field_LONGLONG) PacketSize() uint64 {
 	return 8
 }

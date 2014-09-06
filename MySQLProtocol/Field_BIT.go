@@ -16,6 +16,6 @@ func (field Field_BIT) GetType() byte {
 	return MYSQL_TYPE_BIT
 }
 
-func (field Field_BIT) Size() uint64 {
+func (field Field_BIT) PacketSize() uint64 {
 	return GetLengthEncodedStringSize(field.data)
 }

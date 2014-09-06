@@ -14,6 +14,6 @@ func (field Field_NULL) GetType() byte {
 	return MYSQL_TYPE_NULL
 }
 
-func (field Field_NULL) Size() uint64 {
+func (field Field_NULL) PacketSize() uint64 {
 	return 0
 }

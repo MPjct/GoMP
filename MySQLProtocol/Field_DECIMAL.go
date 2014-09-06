@@ -16,6 +16,6 @@ func (field Field_DECIMAL) GetType() byte {
 	return MYSQL_TYPE_DECIMAL
 }
 
-func (field Field_DECIMAL) Size() uint64 {
+func (field Field_DECIMAL) PacketSize() uint64 {
 	return GetLengthEncodedStringSize(field.data)
 }

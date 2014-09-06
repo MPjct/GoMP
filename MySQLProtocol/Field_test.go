@@ -159,9 +159,9 @@ func Test_Packet_fields(t *testing.T) {
         assert.Equal(t, field.GetType(), value.field_type, error_msg)
         assert.Equal(t, field.Build(), value.packet.data, error_msg)
         
-        error_msg = fmt.Sprintf("Error with type %d, size %d expected %d", value.field_type, field.Size(), len(value.packet.data))
+        error_msg = fmt.Sprintf("Error with type %d, size %d expected %d", value.field_type, int(field.PacketSize()), len(value.packet.data))
         
-        assert.Equal(t, field.Size(), len(value.packet.data), error_msg)
+        assert.Equal(t, int(field.PacketSize()), len(value.packet.data), error_msg)
 	}
     
     // Test unknown fields

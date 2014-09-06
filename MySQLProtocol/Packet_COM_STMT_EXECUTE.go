@@ -25,7 +25,7 @@ func (packet Packet_COM_STMT_EXECUTE) GetPacketSize(context Context) (size uint6
 
 			for _, parameter := range packet.parameters {
 				size += 2
-				size += parameter.Size()
+				size += parameter.PacketSize()
 			}
 		}
 	}

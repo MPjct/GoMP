@@ -16,6 +16,6 @@ func (field Field_GEOMETRY) GetType() byte {
 	return MYSQL_TYPE_GEOMETRY
 }
 
-func (field Field_GEOMETRY) Size() uint64 {
+func (field Field_GEOMETRY) PacketSize() uint64 {
 	return GetLengthEncodedStringSize(field.data)
 }

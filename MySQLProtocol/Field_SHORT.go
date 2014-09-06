@@ -16,6 +16,6 @@ func (field Field_SHORT) GetType() byte {
 	return MYSQL_TYPE_SHORT
 }
 
-func (field Field_SHORT) Size() uint64 {
+func (field Field_SHORT) PacketSize() uint64 {
 	return 2
 }

@@ -16,6 +16,6 @@ func (field Field_VARCHAR) GetType() byte {
 	return MYSQL_TYPE_VARCHAR
 }
 
-func (field Field_VARCHAR) Size() uint64 {
+func (field Field_VARCHAR) PacketSize() uint64 {
 	return GetLengthEncodedStringSize(field.data)
 }
