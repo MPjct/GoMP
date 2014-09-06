@@ -205,6 +205,10 @@ const MYSQL_TYPE_VAR_STRING byte = 253
 const MYSQL_TYPE_STRING byte = 254
 const MYSQL_TYPE_GEOMETRY byte = 255
 
+# This is used in the test code path to test a unknown type. In the event we get
+# a new type with this value, just change it to another unused value.
+const MYSQL_TYPE_UNKNOWN byte = 128
+
 const REFRESH_GRANT uint64 = 1
 const REFRESH_LOG uint64 = 2
 const REFRESH_TABLES uint64 = 4

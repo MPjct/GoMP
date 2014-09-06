@@ -166,6 +166,6 @@ func Test_Packet_fields(t *testing.T) {
     
     // Test unknown fields
     packet = Proto{data: StringToPacket(``)}
-    field = packet.GetField(128)
+    field = packet.GetField(MYSQL_TYPE_UNKNOWN)
     assert.Equal(t, field, nil, "Unknown field does not return nil")
 }
