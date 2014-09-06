@@ -63,9 +63,9 @@ func (field Field_TIME) Size() uint64 {
 }
 
 func (field Field_TIME) PacketSize() uint64 {
-    size := field.Size()
-    if size == 1 {
-        return size
-    }
-    return size+1
+	size := field.Size()
+	if size == 1 {
+		return size
+	}
+	return size + 1
 }

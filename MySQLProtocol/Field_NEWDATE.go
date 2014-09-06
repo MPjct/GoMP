@@ -44,5 +44,5 @@ func (field Field_NEWDATE) Size() uint64 {
 }
 
 func (field Field_NEWDATE) PacketSize() uint64 {
-    return field.Size()+1
+	return field.Size() + 1
 }

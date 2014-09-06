@@ -130,5 +130,5 @@ func (proto *Proto) GetField(field_type byte) (field Field_interface) {
 		field.Get(proto)
 		return field
 	}
-    return nil
+	return nil
 }

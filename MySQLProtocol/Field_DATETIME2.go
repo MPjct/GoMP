@@ -76,5 +76,5 @@ func (field Field_DATETIME2) Size() uint64 {
 }
 
 func (field Field_DATETIME2) PacketSize() uint64 {
-    return field.Size()+1
+	return field.Size() + 1
 }
