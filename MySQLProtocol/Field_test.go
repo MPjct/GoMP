@@ -150,6 +150,8 @@ func Test_Packet_fields(t *testing.T) {
 	var field Field_interface
 	var packet Proto
 	var error_msg string
+    var expected_size int
+    var size int
 
 	for _, value := range fields_test_packets {
 		field = value.packet.GetField(value.field_type)
@@ -159,9 +161,12 @@ func Test_Packet_fields(t *testing.T) {
 		assert.Equal(t, field.GetType(), value.field_type, error_msg)
 		assert.Equal(t, field.Build(), value.packet.data, error_msg)
 
-		error_msg = fmt.Sprintf("Error with type %d, size %d expected %d", value.field_type, int(field.PacketSize()), len(value.packet.data))
+        expected_size = int(field.PacketSize())
+        size = len(value.packet.data)
 
-		assert.Equal(t, int(field.PacketSize()), len(value.packet.data), error_msg)
+		error_msg = fmt.Sprintf("Error with type %d, size %d expected %d", value.field_type, expected_size, size)
+
+		assert.Equal(t, expected_size, size, error_msg)
 	}
 
 	// Test unknown fields
