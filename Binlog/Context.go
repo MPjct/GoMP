@@ -1,5 +1,5 @@
 package Binlog
 
 type Context struct {
-  binlog_version uint16
+	binlog_version uint16
 }

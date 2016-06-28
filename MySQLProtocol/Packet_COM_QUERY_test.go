@@ -25,28 +25,31 @@ func Test_Packet_COM_QUERY(t *testing.T) {
 }
 
 func Benchmark_Packet_COM_QUERY_FromPacket(b *testing.B) {
-	context := Context{capability: CLIENT_PROTOCOL_41}
-	var pkt Packet_COM_QUERY
+	context := COM_QUERY_test_packets[0].context
+	packet := COM_QUERY_test_packets[0].packet
+	pkt := Packet_COM_QUERY{}
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		pkt = Packet_COM_QUERY{}
-		COM_QUERY_test_packets[0].packet.offset = 0
-		pkt.FromPacket(context, COM_QUERY_test_packets[0].packet)
+		packet.offset = 0
+		pkt.FromPacket(context, packet)
 	}
 }
 
 func Benchmark_Packet_COM_QUERY_GetPacketSize(b *testing.B) {
-	context := Context{capability: CLIENT_PROTOCOL_41}
+	context := COM_QUERY_test_packets[0].context
 	pkt := Packet_COM_QUERY{}
 	pkt.FromPacket(context, COM_QUERY_test_packets[0].packet)
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		pkt.GetPacketSize(context)
 	}
 }
 
 func Benchmark_Packet_COM_QUERY_ToPacket(b *testing.B) {
-	context := Context{capability: CLIENT_PROTOCOL_41}
+	context := COM_QUERY_test_packets[0].context
 	pkt := Packet_COM_QUERY{}
 	pkt.FromPacket(context, COM_QUERY_test_packets[0].packet)
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		pkt.ToPacket(context)
 	}

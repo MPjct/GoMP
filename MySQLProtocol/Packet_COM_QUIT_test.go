@@ -22,28 +22,31 @@ func Test_Packet_COM_QUIT(t *testing.T) {
 }
 
 func Benchmark_Packet_COM_QUIT_FromPacket(b *testing.B) {
-	context := Context{capability: CLIENT_PROTOCOL_41}
-	var pkt Packet_COM_QUIT
+	context := COM_QUIT_test_packets[0].context
+	packet := COM_QUIT_test_packets[0].packet
+	pkt := Packet_COM_QUIT{}
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		pkt = Packet_COM_QUIT{}
-		COM_QUIT_test_packets[0].packet.offset = 0
-		pkt.FromPacket(context, COM_QUIT_test_packets[0].packet)
+		packet.offset = 0
+		pkt.FromPacket(context, packet)
 	}
 }
 
 func Benchmark_Packet_COM_QUIT_GetPacketSize(b *testing.B) {
-	context := Context{capability: CLIENT_PROTOCOL_41}
+	context := COM_QUIT_test_packets[0].context
 	pkt := Packet_COM_QUIT{}
 	pkt.FromPacket(context, COM_QUIT_test_packets[0].packet)
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		pkt.GetPacketSize(context)
 	}
 }
 
 func Benchmark_Packet_COM_QUIT_ToPacket(b *testing.B) {
-	context := Context{capability: CLIENT_PROTOCOL_41}
+	context := COM_QUIT_test_packets[0].context
 	pkt := Packet_COM_QUIT{}
 	pkt.FromPacket(context, COM_QUIT_test_packets[0].packet)
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		pkt.ToPacket(context)
 	}
