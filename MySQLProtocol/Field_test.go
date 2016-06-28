@@ -97,6 +97,10 @@ var fields_test_packets = []struct {
 		packet:  Proto{data: StringToPacket(`04 da 07 0a 11`)},
 		context: Context{}},
 
+	{field_type: MYSQL_TYPE_DATE,
+		packet:  Proto{data: StringToPacket(`00`)},
+		context: Context{}},
+
 	{field_type: MYSQL_TYPE_NEWDATE,
 		packet:  Proto{data: StringToPacket(`04 da 07 0a 11`)},
 		context: Context{}},
