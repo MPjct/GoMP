@@ -14,7 +14,7 @@ type EventHeader struct {
 	flags          uint16
 }
 
-func (event EventHeader) GetPacketSize(context Context) (size uint64) {
+func (event EventHeader) GetPacketSize(context Context) uint64 {
 	if context.binlog_version == Binlog_Version_1 {
 		return 13
 	}
