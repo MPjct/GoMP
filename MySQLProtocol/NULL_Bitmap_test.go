@@ -10,7 +10,7 @@ func Test_NULL_Bitmap(t *testing.T) {
 	null_bitmap.num_fields = 9
 	null_bitmap.nulls = make([]byte, 2, 2)
 
-	assert.Equal(t, null_bitmap.GetNullBitmapSize(), 2, "")
+	assert.Equal(t, null_bitmap.GetNullBitmapSize(), uint64(2), "")
 
 	assert.Equal(t, null_bitmap.BuildNullBitmap(), []byte{0x0, 0x0}, "")
 
