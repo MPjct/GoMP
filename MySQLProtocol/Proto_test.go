@@ -95,5 +95,5 @@ func Benchmark_StringToPacket(b *testing.B) {
 }
 
 func Test_DumpPacket(t *testing.T) {
-    assert.Equal(t, DumpPacket([]byte{0x0}), "00000000  00                                                |.|\n", "")
+	assert.Equal(t, DumpPacket([]byte{0x0}), "00000000  00                                                |.|\n", "")
 }

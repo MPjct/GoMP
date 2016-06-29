@@ -20,9 +20,9 @@ func (proto *Proto) ExtractSlice(size uint) (data []byte) {
 }
 
 func DumpPacket(data []byte) (hex_data string) {
-    hex_data = hex.Dump(data)
+	hex_data = hex.Dump(data)
 	fmt.Printf("\n%s\n", hex_data)
-    return hex_data
+	return hex_data
 }
 
 func StringToPacket(value string) (data []byte) {
