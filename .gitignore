@@ -25,3 +25,5 @@ GoMP
 
 # Glide
 vendor
+
+coverage.out
