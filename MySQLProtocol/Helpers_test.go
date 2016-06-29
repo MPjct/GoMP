@@ -18,6 +18,36 @@ func Test_Has_Flag(t *testing.T) {
 	}
 }
 
+func Test_Has_Flag_uint16(t *testing.T) {
+    var values = []struct {
+        value  uint16
+        flag   uint16
+        result bool
+    }{
+        {value: 0x0, flag: 0x1, result: false},
+        {value: 0x1, flag: 0x1, result: true},
+    }
+
+    for _, value := range values {
+        assert.Equal(t, Has_Flag_uint16(value.value, value.flag), value.result, "")
+    }
+}
+
+func Test_Has_Flag_uint64(t *testing.T) {
+    var values = []struct {
+        value  uint64
+        flag   uint64
+        result bool
+    }{
+        {value: 0x0, flag: 0x1, result: false},
+        {value: 0x1, flag: 0x1, result: true},
+    }
+
+    for _, value := range values {
+        assert.Equal(t, Has_Flag_uint64(value.value, value.flag), value.result, "")
+    }
+}
+
 func Benchmark_Has_Flag(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		Has_Flag(0x0, 0x0)
