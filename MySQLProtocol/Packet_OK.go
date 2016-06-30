@@ -22,7 +22,7 @@ func (packet Packet_OK) GetPacketSize(context Context) (size uint64) {
 
 	if Has_Flag(context.capability, CLIENT_SESSION_TRACK) {
 		size += GetLengthEncodedStringSize(packet.info)
-		if len(packet.session_state_change) > 0 {
+		if Has_Flag_uint16(packet.status_flags, SERVER_SESSION_STATE_CHANGED) {
 			size += GetLengthEncodedStringSize(packet.session_state_change)
 		}
 	} else {
@@ -50,7 +50,7 @@ func (packet Packet_OK) ToPacket(context Context) (data []byte) {
 
 	if Has_Flag(context.capability, CLIENT_SESSION_TRACK) {
 		data = append(data, BuildLengthEncodedString(packet.info)...)
-		if len(packet.session_state_change) > 0 {
+		if Has_Flag_uint16(packet.status_flags, SERVER_SESSION_STATE_CHANGED) {
 			data = append(data, BuildLengthEncodedString(packet.session_state_change)...)
 		}
 	} else {
@@ -75,7 +75,7 @@ func (packet *Packet_OK) FromPacket(context Context, data Proto) {
 
 	if Has_Flag(context.capability, CLIENT_SESSION_TRACK) {
 		packet.info = data.GetLengthEncodedString()
-		if len(packet.session_state_change) > 0 {
+		if Has_Flag_uint16(packet.status_flags, SERVER_SESSION_STATE_CHANGED) {
 			packet.session_state_change = data.GetLengthEncodedString()
 		}
 	} else {
