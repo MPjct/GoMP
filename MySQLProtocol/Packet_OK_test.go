@@ -15,7 +15,7 @@ var Packet_OK_test_packets = []struct {
 07 00 00 02 00 00 00 02    00 00 00                   ...........
 `)}, context: Context{capability: CLIENT_TRANSACTIONS}},
 
-    {packet: Proto{data: StringToPacket(`
+	{packet: Proto{data: StringToPacket(`
 0d 00 00 02 00 00 00 02    40 00 00 00 04 03 02 01    ........@.......
 31                                                    1
 `)}, context: Context{capability: CLIENT_PROTOCOL_41 | CLIENT_TRANSACTIONS | CLIENT_SESSION_TRACK}},
@@ -31,11 +31,10 @@ var Packet_OK_test_packets = []struct {
 31                                                    1
 `)}, context: Context{capability: CLIENT_PROTOCOL_41 | CLIENT_TRANSACTIONS | CLIENT_SESSION_TRACK}},
 
-    {packet: Proto{data: StringToPacket(`
+	{packet: Proto{data: StringToPacket(`
 13 00 00 01 00 00 00 00    40 00 00 00 0a 01 05 04    ........@.......
 74 65 73 74 02 01 31                                  test..1
 `)}, context: Context{capability: CLIENT_PROTOCOL_41 | CLIENT_TRANSACTIONS | CLIENT_SESSION_TRACK}},
-
 }
 
 func Test_Packet_OK(t *testing.T) {
