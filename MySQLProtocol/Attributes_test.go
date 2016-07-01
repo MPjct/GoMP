@@ -19,10 +19,20 @@ var Attributes_test_packets = []struct {
 
 func Test_Attributes(t *testing.T) {
 	var pkt Attributes
+	var empty_bytes []byte
+
+	// Test empty removes
+	assert.Equal(t, pkt.RemoveAttribute("foobar"), false, "")
+	assert.Nil(t, pkt.GetAttribute("foobar"))
+	assert.Equal(t, pkt.BuildAttributes(), empty_bytes, "")
 
 	for _, value := range Attributes_test_packets {
-
 		pkt = value.packet.GetAttributes()
 		assert.Equal(t, pkt.BuildAttributes(), value.packet.data, "")
+		assert.Equal(t, pkt.RemoveAttribute("foobar"), false, "")
+		assert.Equal(t, pkt.SetAttribute("foobar", "baz"), true, "")
+		assert.Equal(t, pkt.SetAttribute("foobar", "baz"), true, "")
+		assert.Equal(t, *pkt.GetAttribute("foobar"), "baz", "")
+		assert.Equal(t, pkt.RemoveAttribute("foobar"), true, "")
 	}
 }

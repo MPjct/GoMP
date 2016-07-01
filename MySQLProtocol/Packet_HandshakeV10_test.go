@@ -30,17 +30,16 @@ ff 08 02 00 0f c0 15 00    00 00 00 00 00 00 00 00    ................
 52 5c 55 78 7a 7c 21 29    4b 00                      R\Uxz|!)K.
 `)}, context: Context{}},
 
-    {packet: Proto{data: StringToPacket(`
+	{packet: Proto{data: StringToPacket(`
 19 00 00 00 0a 35 2e 35    2e 32 2d 6d 32 00 0b 00    6....5.5.2-m2...
 00 00 64 76 48 40 49 2d    43 4a 00 ff f7             ..dvH@I-CJ...
 `)}, context: Context{}},
 
-    {packet: Proto{data: StringToPacket(`
+	{packet: Proto{data: StringToPacket(`
 2a 00 00 00 0a 35 2e 35    2e 32 2d 6d 32 00 0b 00    *....5.5.2-m2...
 00 00 64 76 48 40 49 2d    43 4a 00 ff f7 08 02 00    ..dvH@I-CJ......
 00 00 00 00 00 00 00 00    00 00 00 00 00 00          ..............
 `)}, context: Context{}},
-
 }
 
 func Test_Packet_HandshakeV10(t *testing.T) {
@@ -49,10 +48,10 @@ func Test_Packet_HandshakeV10(t *testing.T) {
 	for _, value := range Packet_HandshakeV10_test_packets {
 		pkt = Packet_HandshakeV10{}
 		pkt.FromPacket(value.context, value.packet)
-		if ! assert.Equal(t, pkt.ToPacket(value.context), value.packet.data, "") {
-            DumpPacket(value.packet.data)
-            DumpPacket(pkt.ToPacket(value.context))
-        }
+		if !assert.Equal(t, pkt.ToPacket(value.context), value.packet.data, "") {
+			DumpPacket(value.packet.data)
+			DumpPacket(pkt.ToPacket(value.context))
+		}
 	}
 }
 
