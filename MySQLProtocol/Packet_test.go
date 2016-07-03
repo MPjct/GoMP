@@ -78,21 +78,21 @@ func Test_DecompressPacket(t *testing.T) {
 }
 
 func Test_DecompressPacket_short_data_packet(t *testing.T) {
-    defer func() {
-        assert.NotNil(t, recover())
-    }()
+	defer func() {
+		assert.NotNil(t, recover())
+	}()
 
-    DecompressPacket(Proto{data: StringToPacket(`
+	DecompressPacket(Proto{data: StringToPacket(`
 00 00 00 00 10 00 00
 `)})
 }
 
 func Test_DecompressPacket_short_data_uncompression(t *testing.T) {
-    defer func() {
-        assert.NotNil(t, recover())
-    }()
+	defer func() {
+		assert.NotNil(t, recover())
+	}()
 
-    DecompressPacket(Proto{data: StringToPacket(`
+	DecompressPacket(Proto{data: StringToPacket(`
 48 00 00 01 FF 00 00 62    64 60 60 64 54 65 60 60    |H...w..bd..dTe..|
 62 4e 49 4d 63 60 60 e0    2f 4a 2d 48 4d 2c d1 50    |bNIMc.../J-HM,.P|
 4a 54 d2 51 30 35 d0 64    e0 e1 60 30 02 8a ff 65    |JT.Q05.d...0...e|
