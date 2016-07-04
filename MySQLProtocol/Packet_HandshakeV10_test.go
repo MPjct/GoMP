@@ -72,6 +72,28 @@ func Test_Packet_HandshakeV10_Too_Long(t *testing.T) {
 	pkt.ToPacket(context)
 }
 
+func Test_Packet_HandshakeV10_Too_Short(t *testing.T) {
+	context := Context{}
+	packet := Proto{data: StringToPacket(`
+29 00 00 00 0a 35 2e 35    2e 32 2d 6d 32 00 52 00    6....5.5.2-m2.R.
+00 00 22 3d 4e 50 29 75    39 56 00 ff ff 08 02 00    .."=NP)u9V......
+00 00 00 00 00 00 00 00    00 00 00 00 00             .............
+`)}
+
+	expected := StringToPacket(`
+2a 00 00 00 0a 35 2e 35    2e 32 2d 6d 32 00 52 00    6....5.5.2-m2.R.
+00 00 22 3d 4e 50 29 75    39 56 00 ff ff 08 02 00    .."=NP)u9V......
+00 00 00 00 00 00 00 00    00 00 00 00 00 00          ..............
+`)
+
+	pkt := Packet_HandshakeV10{}
+	pkt.FromPacket(context, packet)
+	if !assert.Equal(t, pkt.ToPacket(context), expected, "") {
+		DumpPacket(expected)
+		DumpPacket(pkt.ToPacket(context))
+	}
+}
+
 func Benchmark_Packet_HandshakeV10_FromPacket(b *testing.B) {
 	context := Packet_HandshakeV10_test_packets[0].context
 	packet := Packet_HandshakeV10_test_packets[0].packet
