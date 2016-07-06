@@ -34,18 +34,18 @@ func Test_Has_Flag_uint16(t *testing.T) {
 }
 
 func Test_Has_Flag_uint32(t *testing.T) {
-    var values = []struct {
-        value  uint32
-        flag   uint32
-        result bool
-    }{
-        {value: 0x0, flag: 0x1, result: false},
-        {value: 0x1, flag: 0x1, result: true},
-    }
+	var values = []struct {
+		value  uint32
+		flag   uint32
+		result bool
+	}{
+		{value: 0x0, flag: 0x1, result: false},
+		{value: 0x1, flag: 0x1, result: true},
+	}
 
-    for _, value := range values {
-        assert.Equal(t, Has_Flag_uint32(value.value, value.flag), value.result, "")
-    }
+	for _, value := range values {
+		assert.Equal(t, Has_Flag_uint32(value.value, value.flag), value.result, "")
+	}
 }
 
 func Test_Has_Flag_uint64(t *testing.T) {
@@ -86,51 +86,51 @@ func Test_Set_Flag(t *testing.T) {
 }
 
 func Test_Set_Flag_uint16(t *testing.T) {
-    var values = []struct {
-        value  uint16
-        flag   uint16
-        result uint16
-    }{
-        {value: 0x0, flag: 0x1, result: 0x1},
-        {value: 0x1, flag: 0x1, result: 0x1},
-        {value: 0x1, flag: 0x0, result: 0x1},
-    }
+	var values = []struct {
+		value  uint16
+		flag   uint16
+		result uint16
+	}{
+		{value: 0x0, flag: 0x1, result: 0x1},
+		{value: 0x1, flag: 0x1, result: 0x1},
+		{value: 0x1, flag: 0x0, result: 0x1},
+	}
 
-    for _, value := range values {
-        assert.Equal(t, Set_Flag_uint16(value.value, value.flag), value.result, "")
-    }
+	for _, value := range values {
+		assert.Equal(t, Set_Flag_uint16(value.value, value.flag), value.result, "")
+	}
 }
 
 func Test_Set_Flag_uint32(t *testing.T) {
-    var values = []struct {
-        value  uint32
-        flag   uint32
-        result uint32
-    }{
-        {value: 0x0, flag: 0x1, result: 0x1},
-        {value: 0x1, flag: 0x1, result: 0x1},
-        {value: 0x1, flag: 0x0, result: 0x1},
-    }
+	var values = []struct {
+		value  uint32
+		flag   uint32
+		result uint32
+	}{
+		{value: 0x0, flag: 0x1, result: 0x1},
+		{value: 0x1, flag: 0x1, result: 0x1},
+		{value: 0x1, flag: 0x0, result: 0x1},
+	}
 
-    for _, value := range values {
-        assert.Equal(t, Set_Flag_uint32(value.value, value.flag), value.result, "")
-    }
+	for _, value := range values {
+		assert.Equal(t, Set_Flag_uint32(value.value, value.flag), value.result, "")
+	}
 }
 
 func Test_Set_Flag_uint64(t *testing.T) {
-    var values = []struct {
-        value  uint64
-        flag   uint64
-        result uint64
-    }{
-        {value: 0x0, flag: 0x1, result: 0x1},
-        {value: 0x1, flag: 0x1, result: 0x1},
-        {value: 0x1, flag: 0x0, result: 0x1},
-    }
+	var values = []struct {
+		value  uint64
+		flag   uint64
+		result uint64
+	}{
+		{value: 0x0, flag: 0x1, result: 0x1},
+		{value: 0x1, flag: 0x1, result: 0x1},
+		{value: 0x1, flag: 0x0, result: 0x1},
+	}
 
-    for _, value := range values {
-        assert.Equal(t, Set_Flag_uint64(value.value, value.flag), value.result, "")
-    }
+	for _, value := range values {
+		assert.Equal(t, Set_Flag_uint64(value.value, value.flag), value.result, "")
+	}
 }
 
 func Benchmark_Set_Flag(b *testing.B) {
@@ -156,51 +156,51 @@ func Test_Remove_Flag(t *testing.T) {
 }
 
 func Test_Remove_Flag_uint16(t *testing.T) {
-    var values = []struct {
-        value  uint16
-        flag   uint16
-        result uint16
-    }{
-        {value: 0x00, flag: 0x01, result: 0x00},
-        {value: 0x10, flag: 0x10, result: 0x00},
-        {value: 0x11, flag: 0x01, result: 0x10},
-    }
+	var values = []struct {
+		value  uint16
+		flag   uint16
+		result uint16
+	}{
+		{value: 0x00, flag: 0x01, result: 0x00},
+		{value: 0x10, flag: 0x10, result: 0x00},
+		{value: 0x11, flag: 0x01, result: 0x10},
+	}
 
-    for _, value := range values {
-        assert.Equal(t, Remove_Flag_uint16(value.value, value.flag), value.result, "")
-    }
+	for _, value := range values {
+		assert.Equal(t, Remove_Flag_uint16(value.value, value.flag), value.result, "")
+	}
 }
 
 func Test_Remove_Flag_uint32(t *testing.T) {
-    var values = []struct {
-        value  uint32
-        flag   uint32
-        result uint32
-    }{
-        {value: 0x00, flag: 0x01, result: 0x00},
-        {value: 0x10, flag: 0x10, result: 0x00},
-        {value: 0x11, flag: 0x01, result: 0x10},
-    }
+	var values = []struct {
+		value  uint32
+		flag   uint32
+		result uint32
+	}{
+		{value: 0x00, flag: 0x01, result: 0x00},
+		{value: 0x10, flag: 0x10, result: 0x00},
+		{value: 0x11, flag: 0x01, result: 0x10},
+	}
 
-    for _, value := range values {
-        assert.Equal(t, Remove_Flag_uint32(value.value, value.flag), value.result, "")
-    }
+	for _, value := range values {
+		assert.Equal(t, Remove_Flag_uint32(value.value, value.flag), value.result, "")
+	}
 }
 
 func Test_Remove_Flag_uint64(t *testing.T) {
-    var values = []struct {
-        value  uint64
-        flag   uint64
-        result uint64
-    }{
-        {value: 0x00, flag: 0x01, result: 0x00},
-        {value: 0x10, flag: 0x10, result: 0x00},
-        {value: 0x11, flag: 0x01, result: 0x10},
-    }
+	var values = []struct {
+		value  uint64
+		flag   uint64
+		result uint64
+	}{
+		{value: 0x00, flag: 0x01, result: 0x00},
+		{value: 0x10, flag: 0x10, result: 0x00},
+		{value: 0x11, flag: 0x01, result: 0x10},
+	}
 
-    for _, value := range values {
-        assert.Equal(t, Remove_Flag_uint64(value.value, value.flag), value.result, "")
-    }
+	for _, value := range values {
+		assert.Equal(t, Remove_Flag_uint64(value.value, value.flag), value.result, "")
+	}
 }
 
 func Benchmark_Remove_Flag(b *testing.B) {

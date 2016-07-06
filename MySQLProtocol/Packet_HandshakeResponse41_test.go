@@ -5,11 +5,11 @@ import "strings"
 import "testing"
 
 var Packet_HandshakeResponse41_test_packets = []struct {
-    packet  Proto
-    context Context
+	packet  Proto
+	context Context
 }{
 
-        {packet: Proto{data: StringToPacket(`
+	{packet: Proto{data: StringToPacket(`
 54 00 00 01 8d a6 0f 00    00 00 00 01 08 00 00 00    T...............
 00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................
 00 00 00 00 70 61 6d 00    14 ab 09 ee f6 bc b1 32    ....pam........2
@@ -18,7 +18,7 @@ var Packet_HandshakeResponse41_test_packets = []struct {
 61 73 73 77 6f 72 64 00                               assword.
 `)}, context: Context{}},
 
-        {packet: Proto{data: StringToPacket(`
+	{packet: Proto{data: StringToPacket(`
 b2 00 00 01 85 a2 1e 00    00 00 00 40 08 00 00 00    ...........@....
 00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................
 00 00 00 00 72 6f 6f 74    00 14 22 50 79 a2 12 d4    ....root.."Py...
@@ -33,14 +33,14 @@ e8 82 e5 b3 f4 1a 97 75    6b c8 be db 9f 80 6d 79    .......uk.....my
 6f 6f 03 62 61 72                                     oo.bar
 `)}, context: Context{}},
 
-        {packet: Proto{data: StringToPacket(`
+	{packet: Proto{data: StringToPacket(`
 3a 00 00 01 05 a6 03 00    00 00 00 01 08 00 00 00    :...............
 00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................
 00 00 00 00 72 6f 6f 74    00 14 14 63 6b 70 99 8a    ....root...ckp..
 b6 9e 96 87 a2 30 9a 40    67 2b 83 38 85 4b          .....0.@g+.8.K
 `)}, context: Context{}},
 
-        {packet: Proto{data: StringToPacket(`
+	{packet: Proto{data: StringToPacket(`
 54 00 00 01 8d a6 0f 00    00 00 00 01 08 00 00 00    T...............
 00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................
 00 00 00 00 70 61 6d 00    14 ab 09 ee f6 bc b1 32    ....pam........2
@@ -48,7 +48,6 @@ b6 9e 96 87 a2 30 9a 40    67 2b 83 38 85 4b          .....0.@g+.8.K
 74 00 6d 79 73 71 6c 5f    6e 61 74 69 76 65 5f 70    t.mysql_native_p
 61 73 73 77 6f 72 64 00                               assword.
 `)}, context: Context{capability: CLIENT_PROTOCOL_41}},
-
 }
 
 func Test_Packet_HandshakeResponse41(t *testing.T) {
@@ -60,26 +59,26 @@ func Test_Packet_HandshakeResponse41(t *testing.T) {
 }
 
 func Test_Packet_HandshakeResponse41_Too_Long(t *testing.T) {
-    context := Packet_HandshakeResponse41_test_packets[0].context
-    packet := Packet_HandshakeResponse41_test_packets[0].packet
+	context := Packet_HandshakeResponse41_test_packets[0].context
+	packet := Packet_HandshakeResponse41_test_packets[0].packet
 
-    pkt := Packet_HandshakeResponse41{}
-    pkt.FromPacket(context, packet)
+	pkt := Packet_HandshakeResponse41{}
+	pkt.FromPacket(context, packet)
 
-    pkt.auth_response = strings.Repeat(" ", 256)
-    pkt.capability = Remove_Flag_uint32(pkt.capability, uint32(CLIENT_PLUGIN_AUTH_LENENC_CLIENT_DATA))
-    pkt.capability = Set_Flag_uint32(pkt.capability, uint32(CLIENT_SECURE_CONNECTION))
+	pkt.auth_response = strings.Repeat(" ", 256)
+	pkt.capability = Remove_Flag_uint32(pkt.capability, uint32(CLIENT_PLUGIN_AUTH_LENENC_CLIENT_DATA))
+	pkt.capability = Set_Flag_uint32(pkt.capability, uint32(CLIENT_SECURE_CONNECTION))
 
-    defer func() {
-        assert.NotNil(t, recover())
-    }()
+	defer func() {
+		assert.NotNil(t, recover())
+	}()
 
-    pkt.ToPacket(context)
+	pkt.ToPacket(context)
 }
 
 func Benchmark_Packet_HandshakeResponse41_FromPacket(b *testing.B) {
-    context := Packet_HandshakeResponse41_test_packets[0].context
-    packet := Packet_HandshakeResponse41_test_packets[0].packet
+	context := Packet_HandshakeResponse41_test_packets[0].context
+	packet := Packet_HandshakeResponse41_test_packets[0].packet
 	for i := 0; i < b.N; i++ {
 		pkt := Packet_HandshakeResponse41{}
 		packet.offset = 0
@@ -88,9 +87,9 @@ func Benchmark_Packet_HandshakeResponse41_FromPacket(b *testing.B) {
 }
 
 func Benchmark_Packet_HandshakeResponse41_GetPacketSize(b *testing.B) {
-    context := Packet_HandshakeResponse41_test_packets[0].context
-    packet := Packet_HandshakeResponse41_test_packets[0].packet
-    pkt := Packet_HandshakeResponse41{}
+	context := Packet_HandshakeResponse41_test_packets[0].context
+	packet := Packet_HandshakeResponse41_test_packets[0].packet
+	pkt := Packet_HandshakeResponse41{}
 	pkt.FromPacket(context, packet)
 	for i := 0; i < b.N; i++ {
 		pkt.GetPacketSize(context)
@@ -98,9 +97,9 @@ func Benchmark_Packet_HandshakeResponse41_GetPacketSize(b *testing.B) {
 }
 
 func Benchmark_Packet_HandshakeResponse41_ToPacket(b *testing.B) {
-    context := Packet_HandshakeResponse41_test_packets[0].context
-    packet := Packet_HandshakeResponse41_test_packets[0].packet
-    pkt := Packet_HandshakeResponse41{}
+	context := Packet_HandshakeResponse41_test_packets[0].context
+	packet := Packet_HandshakeResponse41_test_packets[0].packet
+	pkt := Packet_HandshakeResponse41{}
 	pkt.FromPacket(context, packet)
 	for i := 0; i < b.N; i++ {
 		pkt.ToPacket(context)
