@@ -1,7 +1,8 @@
 package MySQLProtocol
 
-import "testing"
 import "github.com/stretchr/testify/assert"
+import "strings"
+import "testing"
 
 var Packet_HandshakeResponse41_test_packets = []struct {
     packet  Proto
@@ -56,6 +57,24 @@ func Test_Packet_HandshakeResponse41(t *testing.T) {
 		pkt.FromPacket(value.context, value.packet)
 		assert.Equal(t, pkt.ToPacket(value.context), value.packet.data, "")
 	}
+}
+
+func Test_Packet_HandshakeResponse41_Too_Long(t *testing.T) {
+    context := Packet_HandshakeResponse41_test_packets[0].context
+    packet := Packet_HandshakeResponse41_test_packets[0].packet
+
+    pkt := Packet_HandshakeResponse41{}
+    pkt.FromPacket(context, packet)
+
+    pkt.auth_response = strings.Repeat(" ", 256)
+    pkt.capability = Remove_Flag_uint32(pkt.capability, uint32(CLIENT_PLUGIN_AUTH_LENENC_CLIENT_DATA))
+    pkt.capability = Set_Flag_uint32(pkt.capability, uint32(CLIENT_SECURE_CONNECTION))
+
+    defer func() {
+        assert.NotNil(t, recover())
+    }()
+
+    pkt.ToPacket(context)
 }
 
 func Benchmark_Packet_HandshakeResponse41_FromPacket(b *testing.B) {
